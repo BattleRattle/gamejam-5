@@ -15,12 +15,19 @@ carActor = gamvas.Actor.extend({
 		this.setFile(st.resource.getImage('images/car.png'));
 
 		// set the actors center point to its lower center
-		this.setCenter(0,0);
+		//this.setCenter(0,0);
+
+        // a car is a moving object
+        this.bodyRect(this.position.x, this.position.y, 64, 32, gamvas.physics.DYNAMIC);
+
+        //this.linearDamping(0.15);
 
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
 
 		// and switch to it (actors have a default state which does nothing)
 		this.setState('default');
+
 	}
+
 });
