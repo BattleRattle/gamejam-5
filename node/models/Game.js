@@ -15,7 +15,7 @@ Game.prototype.start = function() {
 
 	setInterval(function() {
 		var data = victimEventHandler.push();
-		var response = new Response(VictimEventHandler.prototype.CLASS_NAME, 'push', Response.TYPE_BROADCAST, data);
+		var response = new Response(VictimEventHandler.prototype.CLASS_NAME, 'push', Response.prototype.TYPE_BROADCAST, data);
 
 		that.connectionHandler.sendBroadcast(response);
 	}, 1000);

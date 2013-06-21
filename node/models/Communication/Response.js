@@ -1,14 +1,14 @@
 var Response = function (remoteClass, method, responseType, data) {
 
-	this.TYPE_DIRECT = 'direct';
-	this.TYPE_BROADCAST = 'broadcast';
-
 	this.remoteClass = remoteClass;
 	this.method = method;
 	this.responseType = responseType;
 	this.data = data;
 
 }
+
+Response.prototype.TYPE_DIRECT = 'direct';
+Response.prototype.TYPE_BROADCAST = 'broadcast';
 
 Response.prototype.getRemoteClass = function () {
 	return this.remoteClass;

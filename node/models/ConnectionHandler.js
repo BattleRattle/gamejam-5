@@ -56,14 +56,14 @@ ConnectionHandler.prototype.callEventHandler = function (data) {
 	return handler[object.method](object.data);
 }
 
-ConnectionHandler.prototype.handleResponse = function(socket, response) {
+ConnectionHandler.prototype.handleResponse = function (socket, response) {
 	if (!response) {
 		return;
 	}
 
-	if (response.getType() === Response.TYPE_DIRECT) {
+	if (response.getType() === Response.prototype.TYPE_DIRECT) {
 		this.sendResponse(socket, response);
-	} else if (response.getType() === Response.TYPE_BROADCAST) {
+	} else if (response.getType() === Response.prototype.TYPE_BROADCAST) {
 		this.sendBroadcast(response);
 	} else {
 		throw new Error('Response type not implemented: ' + response.getType());
@@ -71,19 +71,19 @@ ConnectionHandler.prototype.handleResponse = function(socket, response) {
 }
 
 ConnectionHandler.prototype.sendResponse = function (socket, response) {
-	socket.send(JSON.stringify({
-		'class': response.getRemoteClass(),
-		'method': response.getMethod(),
-		'data': response.getData()
-	}));
+	socket.send(this.createRawResponse(response));
 }
 
-ConnectionHandler.prototype.sendBroadcast = function(response) {
-	this.io.sockets.send(JSON.stringify({
+ConnectionHandler.prototype.sendBroadcast = function (response) {
+	this.io.sockets.send(this.createRawResponse(response));
+}
+
+ConnectionHandler.prototype.createRawResponse = function (response) {
+	return JSON.stringify({
 		'class': response.getRemoteClass(),
 		'method': response.getMethod(),
 		'data': response.getData()
-	}));
+	});
 }
 
 module.exports = ConnectionHandler;
