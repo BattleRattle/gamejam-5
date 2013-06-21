@@ -2,6 +2,8 @@ levelScene = gamvas.State.extend({
 	init: function() {
 		console.log("level");
 		this.dim = gamvas.getCanvasDimension();
+
+		this.addActor(new carActor("car", 0, 0));
 	},
 
 	postDraw: function(t) {
