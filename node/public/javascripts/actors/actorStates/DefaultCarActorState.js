@@ -7,27 +7,29 @@ defaultCarActorState = gamvas.ActorState.extend({
 
 	// this is the actors brain, t is time in seconds since last thought
 	update: function(t) {
-		// count up PI per second, which means we will move
-		// one second up, one second down, as 360 degrees is 2*Math.PI in
-		// radians
-		this.counter += Math.PI*t;
 
-		// clamp our counter to 360 degrees aka 2*Math.PI in radians
-		if (this.counter > 2*Math.PI) {
-			this.counter -= 2*Math.PI;
-		}
+        var velo = this.actor.body.GetLinearVelocity();
 
 
-        if (gamvas.key.isPressed(gamvas.key.UP)) {
-            //var velo = this.body.GetLinearVelocity();
-            var velo = new Box2D.Common.Math.b2Vec2(0.5, 0.0);
+        if (gamvas.key.isPressed(gamvas.key.DOWN))
+            velo.y =  Math.min(2.0, velo.y + 0.1);
+        else if (gamvas.key.isPressed(gamvas.key.UP))
+            velo.y =  Math.max(-2.0, velo.y - 0.1)
 
-            this.actor.body.SetLinearVelocity(velo);
-        }
+        if (gamvas.key.isPressed(gamvas.key.RIGHT))
+            velo.x =  Math.min(2.0, velo.x + 0.1);
+        else if (gamvas.key.isPressed(gamvas.key.LEFT))
+            velo.x =  Math.max(-2.0, velo.x - 0.1)
 
+        this.actor.body.SetLinearVelocity(velo);
 
-		// move our actor the sin value of counter, which gives him
-		// a smooth circular motion
-		//this.actor.move(0, -10*Math.sin(this.counter));
+            //var velo = new Box2D.Common.Math.b2Vec2(0.5, 0.0);
+            /*var forward = new Box2D.Common.Math.b2Vec2(1.0, 0.0);
+
+            var currentForwardNormal = this.actor.body.GetWorldVector(forward);
+
+            var relativeVelo = this.actor.body.GetLocalVector(
+                this.actor.body.GetLinearVelocityFromLocalPoint(
+                    new Box2D.Common.Math.b2Vec2(this.actor.position.x, this.actor.position.y)));*/
 	}
 });
