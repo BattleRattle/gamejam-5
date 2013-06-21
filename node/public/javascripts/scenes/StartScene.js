@@ -2,6 +2,13 @@ startScene = gamvas.State.extend({
 	init: function() {
 		console.log("start");
 		this.dim = gamvas.getCanvasDimension();
+
+        // assume our car (128px X 64px) is 4m X 2m
+        gamvas.physics.pixelsPerMeter = 32;
+
+        // we need no gravity for a top-down view
+        var gravity = new gamvas.Vector2D(0, 0);
+        gamvas.physics.setGravity(gravity);
 	},
 
 
