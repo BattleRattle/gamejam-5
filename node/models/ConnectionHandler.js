@@ -1,4 +1,5 @@
 var ConnectionEventFactory = require('./ConnectionEventFactory.js');
+var Response = require('./Communication/Response.js');
 
 var ConnectionHandler = function (io) {
 
@@ -25,11 +26,7 @@ ConnectionHandler.prototype.handleConnection = function (socket) {
 	socket.emit('debug', process.env.DEBUG ? true : false);
 
 	socket.on('message', function (data) {
-		var response = that.callEventHandler(data)
-
-		if (response) {
-			that.sendResponse(socket, data, response);
-		}
+		that.handleResponse(socket, that.callEventHandler(data));
 	});
 
 	socket.on('disconnect', function () {
@@ -59,22 +56,33 @@ ConnectionHandler.prototype.callEventHandler = function (data) {
 	return handler[object.method](object.data);
 }
 
-ConnectionHandler.prototype.sendResponse = function (socket, request, response) {
-	var result = {};
-	var object = JSON.parse(request);
+ConnectionHandler.prototype.handleResponse = function(socket, response) {
+	if (!response) {
+		return;
+	}
 
-	result.class = object.class;
-	result.method = object.method;
-	result.data = response;
-
-	socket.send(JSON.stringify(result));
+	if (response.getType() === Response.TYPE_DIRECT) {
+		this.sendResponse(socket, response);
+	} else if (response.getType() === Response.TYPE_BROADCAST) {
+		this.sendBroadcast(response);
+	} else {
+		throw new Error('Response type not implemented: ' + response.getType());
+	}
 }
 
-ConnectionHandler.prototype.broadcast = function(remoteClass, method, data) {
+ConnectionHandler.prototype.sendResponse = function (socket, response) {
+	socket.send(JSON.stringify({
+		'class': response.getRemoteClass(),
+		'method': response.getMethod(),
+		'data': response.getData()
+	}));
+}
+
+ConnectionHandler.prototype.sendBroadcast = function(response) {
 	this.io.sockets.send(JSON.stringify({
-		'class': remoteClass,
-		'method': method,
-		'data': data
+		'class': response.getRemoteClass(),
+		'method': response.getMethod(),
+		'data': response.getData()
 	}));
 }
 

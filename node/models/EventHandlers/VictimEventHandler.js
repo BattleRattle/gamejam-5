@@ -1,9 +1,14 @@
+var AbstractEventHandler = require('./AbstractEventHandler.js');
+
 var VictimEventHandler = function () {
 
 	this.victimCounter = 0;
 	this.victims = [];
 
 }
+
+VictimEventHandler.prototype = AbstractEventHandler.prototype;
+VictimEventHandler.prototype.CLASS_NAME = 'Victim';
 
 VictimEventHandler.prototype.push = function () {
 	var victim = {
@@ -28,6 +33,10 @@ VictimEventHandler.prototype.collide = function (data) {
 	}
 
 	this.victims = newVictims;
+
+	return this.createBroadcastResponse(this.CLASS_NAME, 'died', {
+		'id': data.id
+	});
 }
 
 module.exports = VictimEventHandler;
