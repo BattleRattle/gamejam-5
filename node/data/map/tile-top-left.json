@@ -1,0 +1,28 @@
+{
+	"id": "top-left",
+	"image": "tile-top-left.png",
+	"position": "NW",
+	"collisions": [
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 0,
+			"width": 24,
+			"height": 376
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 352,
+			"width": 352,
+			"height": 24
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 0,
+			"width": 160,
+			"height": 160
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+	"id": "grass-top",
+	"image": "tile-grass-top.png",
+	"position": "N",
+	"collisions": [
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 136,
+			"width": 512,
+			"height": 24
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		}
+	]
+}

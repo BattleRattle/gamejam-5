@@ -1,0 +1,19 @@
+{
+	"id": "tutorial",
+	"default": true,
+	"tilesets": [
+		"bottom-left",
+		"bottom-right",
+		"default",
+		"grass-bottom",
+		"grass-left",
+		"grass-right",
+		"grass-top",
+		"top-left",
+		"top-right"
+	],
+	"size": {
+		"height": 5,
+		"width": 5
+	}
+}
