@@ -2,6 +2,8 @@
  * GET home page.
  */
 
+var path = require('path');
+
 exports.index = function (req, res) {
-	res.sendfile('./public/index.html');
+	res.sendfile(path.join(__dirname, '/../public/index.html'));
 };
