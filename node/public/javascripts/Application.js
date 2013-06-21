@@ -1,5 +1,12 @@
 
 gamvas.event.addOnLoad(function() {
+	// some first fake full screen size
+	var canvas = document.getElementById("gameCanvas");
+	if (canvas.getContext) {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	}
+
 	gamvas.state.addState(new startScene('start'));
 	gamvas.state.addState(new levelScene('level'));
 	gamvas.start('gameCanvas');

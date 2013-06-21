@@ -1,5 +1,6 @@
 startScene = gamvas.State.extend({
 	init: function() {
+		console.log("start");
 		this.dim = gamvas.getCanvasDimension();
 	},
 

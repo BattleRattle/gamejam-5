@@ -1,5 +1,6 @@
 levelScene = gamvas.State.extend({
 	init: function() {
+		console.log("level");
 		this.dim = gamvas.getCanvasDimension();
 	},
 
