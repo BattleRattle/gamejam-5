@@ -15,7 +15,7 @@ gamvas.event.addOnLoad(function() {
 
 
 	// this will initialize the canvas
-	gamvas.start('gameCanvas');
+	gamvas.start('gameCanvas', true);
 
 	// provide fullscreen switch if browser is capable of fullscreen
 	// @todo this does not really work yet
