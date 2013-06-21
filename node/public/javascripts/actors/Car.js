@@ -18,7 +18,7 @@ carActor = gamvas.Actor.extend({
 		//this.setCenter(64,32);
 
         // a car is a moving object
-        this.bodyRect(this.position.x, this.position.y, 64, 32, gamvas.physics.DYNAMIC);
+        this.bodyRect(this.position.x, this.position.y, 48, 24, gamvas.physics.DYNAMIC);
 
         this.setLinearDamping(0.15);
 
