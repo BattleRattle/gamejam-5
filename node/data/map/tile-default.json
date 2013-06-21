@@ -1,0 +1,35 @@
+{
+	"id": "default",
+	"image": "tile-default.png",
+	"position": "*",
+	"collisions": [
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 0,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 0,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		}
+	]
+}

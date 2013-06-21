@@ -10,6 +10,9 @@ var express = require('express'),
 	connectionHandler = require('./models/ConnectionHandler.js'),
 	Game = require('./models/Game.js');
 
+var DataLoaderFactory = require('./models/DataLoaderFactory'),
+	MapGenerator = require('./models/Map/MapGenerator');
+
 var app = express();
 
 // all environments
@@ -37,3 +40,8 @@ http.createServer(app).listen(app.get('port'), function () {
 connectionHandler = new connectionHandler(io);
 var game = new Game(connectionHandler);
 game.start();
+
+/*var fac = new DataLoaderFactory();
+var mapGen = new MapGenerator(fac);
+
+mapGen.getMap("tutorial");*/
