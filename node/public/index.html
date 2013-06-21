@@ -12,6 +12,7 @@
 	<script src="javascripts/actors/actorStates/DefaultCarActorState.js"></script>
 
 	<!-- Actors -->
+	<script src="javascripts/actors/Debug.js"></script>
 	<script src="javascripts/actors/Car.js"></script>
 
 	<!-- Scenes -->
@@ -19,13 +20,8 @@
 	<script src="javascripts/scenes/LevelScene.js"></script>
 	<script src="javascripts/Application.js"></script>
 
-	<script>
-		var socket = io.connect('http://localhost:8080');
-		socket.on('news', function (data) {
-			console.log(data);
-			socket.emit('my other event', { my: 'data' });
-		});
-	</script>
+	<!-- init connection handling at last -->
+	<script src="javascripts/modules/Connection.js"></script>
 </head>
 <body>
 <div id="fullscreen"></div>
