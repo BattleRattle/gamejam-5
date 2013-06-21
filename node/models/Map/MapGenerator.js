@@ -75,10 +75,9 @@ MapGenerator.prototype.generateMap = function (mapId) {
 				map.tilesets[tile.id] = tile;
 			}
 		}
-
-		return map;
 	}
 
+	return map;
 };
 
 module.exports = MapGenerator;
