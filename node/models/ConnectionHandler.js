@@ -1,7 +1,10 @@
+var ConnectionEventFactory = require('./ConnectionEventFactory.js');
+
 var ConnectionHandler = function (io) {
 
 	this.io = io;
 	this.connections = [];
+	this.connectionEventFactory = new ConnectionEventFactory();
 
 	this.init();
 
@@ -17,21 +20,12 @@ ConnectionHandler.prototype.init = function () {
 
 ConnectionHandler.prototype.handleConnection = function (socket) {
 	var that = this;
-
 	this.connections.push(socket);
 
 	socket.emit('debug', process.env.DEBUG ? true : false);
 
 	socket.on('message', function(data) {
-		console.log('received message: ' + data);
-	});
-
-	socket.emit('news', {
-		hello: 'world'
-	});
-
-	socket.on('my other event', function (data) {
-		console.log(data);
+		that.callEventHandler(data);
 	});
 
 	socket.on('disconnect', function () {
@@ -52,6 +46,12 @@ ConnectionHandler.prototype.handleDisconnect = function (socket) {
 	}
 
 	this.connections = newConnections;
+}
+
+ConnectionHandler.prototype.callEventHandler = function(data) {
+	var object = JSON.parse(data);
+	var handler = this.connectionEventFactory.getEventHandler(object.class);
+	var response = handler[object.method](object.data);
 }
 
 module.exports = ConnectionHandler;
