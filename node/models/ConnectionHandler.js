@@ -24,8 +24,12 @@ ConnectionHandler.prototype.handleConnection = function (socket) {
 
 	socket.emit('debug', process.env.DEBUG ? true : false);
 
-	socket.on('message', function(data) {
-		that.callEventHandler(data);
+	socket.on('message', function (data) {
+		var response = that.callEventHandler(data)
+
+		if (response) {
+			that.sendResponse(socket, data, response);
+		}
 	});
 
 	socket.on('disconnect', function () {
@@ -48,10 +52,30 @@ ConnectionHandler.prototype.handleDisconnect = function (socket) {
 	this.connections = newConnections;
 }
 
-ConnectionHandler.prototype.callEventHandler = function(data) {
+ConnectionHandler.prototype.callEventHandler = function (data) {
 	var object = JSON.parse(data);
 	var handler = this.connectionEventFactory.getEventHandler(object.class);
-	var response = handler[object.method](object.data);
+
+	return handler[object.method](object.data);
+}
+
+ConnectionHandler.prototype.sendResponse = function (socket, request, response) {
+	var result = {};
+	var object = JSON.parse(request);
+
+	result.class = object.class;
+	result.method = object.method;
+	result.data = response;
+
+	socket.send(JSON.stringify(result));
+}
+
+ConnectionHandler.prototype.broadcast = function(remoteClass, method, data) {
+	this.io.sockets.send(JSON.stringify({
+		'class': remoteClass,
+		'method': method,
+		'data': data
+	}));
 }
 
 module.exports = ConnectionHandler;

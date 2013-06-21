@@ -8,7 +8,8 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	io = require('socket.io').listen(8080),
-	connectionHandler = require('./models/ConnectionHandler.js');
+	connectionHandler = require('./models/ConnectionHandler.js'),
+	Game = require('./models/Game.js');
 
 var app = express();
 
@@ -36,3 +37,5 @@ http.createServer(app).listen(app.get('port'), function () {
 });
 
 connectionHandler = new connectionHandler(io);
+var game = new Game(connectionHandler);
+game.start();
