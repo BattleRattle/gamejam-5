@@ -3,12 +3,10 @@ var socket = io.connect('http://localhost:8080');
 var handlerFactory = new MessageHandlerFactory(socket);
 
 socket.on('news', function (data) {
-	console.log(data);
 	socket.emit('my other event', { my: 'data' });
 });
 
 socket.on('debug', function (data) {
-	console.log("debug: ", data);
 	gamvas.config.debug = data;
 });
 

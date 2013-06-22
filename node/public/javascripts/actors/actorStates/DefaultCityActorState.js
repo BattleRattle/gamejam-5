@@ -6,7 +6,6 @@ defaultCityActorState = gamvas.ActorState.extend({
 	create: function (name, config) {
 		this._super(name);
 		this.config = config;
-		console.log(config);
 	},
 
 	init: function () {
@@ -30,8 +29,6 @@ defaultCityActorState = gamvas.ActorState.extend({
 			}
 			x += 512;
 		}
-
-		//console.log (this.actors)
 	},
 
 	draw: function (t) {

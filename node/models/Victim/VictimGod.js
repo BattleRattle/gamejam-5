@@ -6,7 +6,7 @@ var VictimGod = function(levelData, dataLoaderFactory) {
 	this.victims = [];
 	this.victimCounter = 0;
 
-	this.levelId = levelData.leveId;
+	this.levelId = levelData.levelId;
 	this.levelData = levelData;
 
 	this.victimDataLoaderFactory = dataLoaderFactory.getDataLoader('Victim');
@@ -37,7 +37,9 @@ VictimGod.prototype.buildVictim = function () {
 };
 
 VictimGod.prototype.selectVictim = function () {
-	return this.levelData.victims[0];
+	var victimId = this.levelData.victims[0];
+
+	return this.victimDataLoaderFactory.getData(victimId);
 };
 
 VictimGod.prototype.selectPath = function (x, y) {
@@ -48,6 +50,14 @@ VictimGod.prototype.selectPath = function (x, y) {
 	if (tileset.paths) {
 		var rand = getRandomInt(0, tileset.paths.length - 1);
 		return tileset.paths[rand];
+	}
+}
+
+VictimGod.prototype.getVictim = function (victimId) {
+	for (var index in this.victims) {
+		if (this.victims[index].id === victimId) {
+			return this.victims[index];
+		}
 	}
 }
 

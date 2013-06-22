@@ -4,7 +4,6 @@ tileActor = gamvas.Actor.extend({
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
 	create: function(name, x, y, config) {
-		console.log("render :", name, " x:",x," y:",y, " tile:", config)
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 

@@ -11,5 +11,5 @@ PlayerMessageHandler.prototype.callUpdatePosition = function (data) {
 };
 
 PlayerMessageHandler.prototype.newPlayerPosition = function (data) {
-	console.log(data);
+	//console.log(data);
 };

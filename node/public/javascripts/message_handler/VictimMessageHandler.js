@@ -3,6 +3,7 @@ var VictimMessageHandler = function (socket) {
 };
 
 VictimMessageHandler.prototype.push = function (data) {
+	console.log("victim",data)
 	Application.scenes['level'].addVictim(data);
 };
 

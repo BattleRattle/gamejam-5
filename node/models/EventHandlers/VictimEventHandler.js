@@ -1,4 +1,5 @@
-var AbstractEventHandler = require('./AbstractEventHandler.js');
+var AbstractEventHandler = require('./AbstractEventHandler'),
+	HighScoreEventHandler = require('./HighScoreEventHandler');
 
 var VictimEventHandler = function () {
 	this.victimGods = {};
@@ -18,7 +19,14 @@ VictimEventHandler.prototype.registerVictimGod = function (levelId, victimGod) {
 
 VictimEventHandler.prototype.collide = function (player, data) {
 	if (this.victimGods[data.levelId]) {
-		this.victimGods[data.levelId].removeKilledVictim(data.id);
+		var victim = this.victimGods[data.levelId].getVictim(data.id);
+		if (victim) {
+			var score = victim.data.killPoints;
+			this.victimGods[data.levelId].removeKilledVictim(data.id);
+			player.updateScore(score);
+
+			this.createDirectResponse(player, HighScoreEventHandler.CLASS_NAME, 'updateScore', player.getScore());
+		}
 	}
 
 	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {

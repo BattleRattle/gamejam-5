@@ -1,6 +1,5 @@
 startScene = gamvas.State.extend({
 	init: function() {
-		console.log("start");
 		this.dim = gamvas.getCanvasDimension();
 
         // assume our car (96px X 48px) is 4m X 2m

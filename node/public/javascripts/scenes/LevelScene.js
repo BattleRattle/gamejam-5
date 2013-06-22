@@ -8,6 +8,7 @@ levelScene = gamvas.State.extend({
 
 		this.addActor(new cityActor("city", 0, 0, Application.levelData));
 		this.addActor(this.carActor = new carActor("car", 0, 0, Application.levelData.car));
+		this.addActor(this.score = new scoreActor("score", 0, 0));
 
 		if (gamvas.config.debug) {
 			this.addActor(new debugActor("debug"));

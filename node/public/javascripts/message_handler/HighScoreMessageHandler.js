@@ -12,4 +12,8 @@ HighScoreMessageHandler.prototype.callGetHighScore = function (data) {
 		"method": "getHighScore",
 		"data": data
 	}));
+};
+
+HighScoreMessageHandler.prototype.updateScore = function (data) {
+	Application.scenes["level"].score.setScore(data);
 }
