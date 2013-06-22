@@ -3,5 +3,9 @@ var VictimMessageHandler = function (socket) {
 };
 
 VictimMessageHandler.prototype.push = function (data) {
-	//console.log (data);
-}
+	Application.scenes['level'].addVictim(data);
+};
+
+VictimMessageHandler.prototype.died = function (data) {
+	Application.scenes['level'].removeVictim(data);
+};

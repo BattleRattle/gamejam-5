@@ -30,7 +30,7 @@ Game.prototype.start = function() {
 		for (var i in referencePlayers) {
 			victimEventHandler.push(referencePlayers[i]);
 		}
-	}, 1000);
+	}, 9000);
 }
 
 Game.prototype.createPlayer = function(socket) {

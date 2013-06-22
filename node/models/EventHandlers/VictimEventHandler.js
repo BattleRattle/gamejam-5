@@ -13,8 +13,8 @@ VictimEventHandler.CLASS_NAME = 'Victim';
 VictimEventHandler.prototype.push = function (player) {
 	var victim = {
 		'id': ++this.victimCounter,
-		'x': 1130,
-		'y': 230
+		'x': 25 * this.victimCounter,
+		'y': 25 * this.victimCounter
 	};
 	this.victims.push(victim);
 

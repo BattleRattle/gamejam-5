@@ -17,9 +17,10 @@ gamvas.event.addOnLoad(function() {
 
 	// add states here
 	Application.scenes["high_score"] = new highScoreScene('high_score');
+	Application.scenes["level"] = new levelScene('level')
 	gamvas.state.addState(new startScene('start'));
 	gamvas.state.addState(Application.scenes["high_score"]);
-	gamvas.state.addState(new levelScene('level'));
+	gamvas.state.addState(Application.scenes["level"]);
 
 
 	// this will initialize the canvas
