@@ -6,6 +6,8 @@ victimActor = gamvas.Actor.extend({
 	create: function(name, x, y, config) {
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
+		this.config = config;
+		this.collided = false;
 
 		//this.bodyRect(this.position.x, this.position.y, 25);
 
@@ -15,5 +17,15 @@ victimActor = gamvas.Actor.extend({
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
 		this.setFile(st.resource.getImage('images/victims/default.png'));
+
+		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.STATIC);
+	},
+
+	onCollisionEnter: function(a) {
+		if (!this.collided) {
+			this.collided = true;
+			handlerFactory.getHandler("Victim").callCollide({id: this.config.id});
+			console.log("i got hit by "+a.name);
+		}
 	}
 });
