@@ -31,7 +31,7 @@ carActor = gamvas.Actor.extend({
 
         this.MAX_HEALTH = 1000;
 
-        this.health = 100;
+        this.health = 1000;
 
 		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
