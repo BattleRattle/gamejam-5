@@ -26,8 +26,16 @@ levelScene = gamvas.State.extend({
 	},
 
 	preDraw: function(t) {
+		var MIN_ZOOM = 0.8;
+		var MAX_ZOOM = 1.3;
+		var MAX_VECTOR_LENGTH = 18;
+
 		// follow the car
+		var velocity = this.carActor.getForwardVelocity();
+		var zoom = MAX_ZOOM - (MAX_ZOOM - MIN_ZOOM) * Math.min(1, Math.max(0, velocity / MAX_VECTOR_LENGTH));
+
 		this.camera.setPosition(this.carActor.position.x, this.carActor.position.y);
+		this.camera.zoomFactor = zoom;
 	},
 
 	postDraw: function(t) {

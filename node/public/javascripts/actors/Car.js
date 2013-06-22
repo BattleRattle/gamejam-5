@@ -75,5 +75,14 @@ carActor = gamvas.Actor.extend({
 		this.wheels.forEach(function(wheel) {
 			wheel.calculatePhysics(t);
 		});
+	},
+
+	getForwardVelocity: function() {
+		if (!this.body) {
+			return 0;
+		}
+
+		var currentForwardNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+		return multiplyVec2D(currentForwardNormal, Box2D.Common.Math.b2Math.Dot(currentForwardNormal, this.body.GetLinearVelocity())).Length();
 	}
 });

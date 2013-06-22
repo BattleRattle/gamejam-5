@@ -11,10 +11,8 @@
 		"grass-top",
 		"top-left",
 		"top-right",
-		"cs-left",
 		"cs-right",
-		"cs-bottom",
-		"cs-top"
+		"cs-bottom"
 	],
 	"size": {
 		"height": 10,
