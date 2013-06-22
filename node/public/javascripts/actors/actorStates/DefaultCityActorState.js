@@ -23,7 +23,7 @@ defaultCityActorState = gamvas.ActorState.extend({
 				this.actors[xCounter][yCounter] = new tileActor("tile" + xCounter + "x" + yCounter, x, y, tileset);
 
 				for (var i = tileset.collisions.length - 1; i >= 0; i--) {
-					var box = new mapCollisionBoxActor("collision" + i, x - tileset.collisions[i].x, y - tileset.collisions[i].y, tileset.collisions[i]);
+					var box = new mapCollisionBoxActor("collision" + i, x + tileset.collisions[i].x, y + tileset.collisions[i].y, tileset.collisions[i]);
 					this.collisionBoxes.push(box);
 				}
 				y += 512;

@@ -7,9 +7,6 @@ cityActor = gamvas.Actor.extend({
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 
-		// set the actors center point to its lower center
-		this.setCenter(0,0);
-
 		// finally add the state to our actor
 		this.addState(new defaultCityActorState('default', config.map));
 
