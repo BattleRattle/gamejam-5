@@ -1,6 +1,6 @@
 {
 	"id": "grass-left",
-	"image": "tile-grass-left.png",
+	"image": "tile-grass-left.jpg",
 	"position": "W",
 	"collisions": [
 		{
