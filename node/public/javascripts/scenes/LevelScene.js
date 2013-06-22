@@ -1,6 +1,5 @@
 levelScene = gamvas.State.extend({
 	init: function() {
-		this.init = true;
 		this.victims = [];
 
 		this.dim = gamvas.getCanvasDimension();
@@ -14,10 +13,12 @@ levelScene = gamvas.State.extend({
 		if (gamvas.config.debug) {
 			this.addActor(new debugActor("debug"));
 		}
+
+		this.init = true;
 	},
 
 	addVictim: function (data) {
-		if (this.init) {
+		if (this.init && this.victims) {
 			var victim = new victimActor("victim" + data.id, data.x, data.y, data);
 			this.victims[data.id] = victim;
 			this.addActor(victim);
