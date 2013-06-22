@@ -14,12 +14,9 @@ LevelEventHandler.prototype = AbstractEventHandler.prototype;
 LevelEventHandler.CLASS_NAME = 'Level';
 
 LevelEventHandler.prototype.enter = function (player, data) {
-	var mapData = this.levelGenerator.getLevel(data.levelId);
+	var levelData = this.levelGenerator.getLevel(data.levelId);
 
-	return this.createBroadcastResponse(LevelEventHandler.CLASS_NAME, 'getData', {
-		'levelId': data.levelId,
-		'mapData': mapData
-	});
+	return this.createBroadcastResponse(LevelEventHandler.CLASS_NAME, 'getData', levelData);
 }
 
 module.exports = LevelEventHandler;
