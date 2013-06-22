@@ -6,12 +6,22 @@ var AbstractEventHandler = function () {
 
 }
 
-AbstractEventHandler.prototype.createDirectResponse = function(remoteClass, method, data) {
-	return new Response(remoteClass, method, Response.prototype.TYPE_DIRECT, data);
+AbstractEventHandler.prototype.setConnectionHandler = function (connectionHandler) {
+	this.connectionHandler = connectionHandler;
 }
 
-AbstractEventHandler.prototype.createBroadcastResponse = function(remoteClass, method, data) {
-	return new Response(remoteClass, method, Response.prototype.TYPE_BROADCAST, data);
+AbstractEventHandler.prototype.getConnectionHandler = function () {
+	return this.connectionHandler;
+}
+
+AbstractEventHandler.prototype.createDirectResponse = function (player, remoteClass, method, data) {
+	var response = new Response(remoteClass, method, Response.prototype.TYPE_DIRECT, data);
+	this.connectionHandler.handleResponse(player.getSocket(), response);
+}
+
+AbstractEventHandler.prototype.createBroadcastResponse = function (remoteClass, method, data) {
+	var response = new Response(remoteClass, method, Response.prototype.TYPE_BROADCAST, data);
+	this.connectionHandler.handleResponse(this.connectionHandler.io.sockets, response);
 }
 
 module.exports = AbstractEventHandler;

@@ -4,15 +4,15 @@ var Response = require('./Communication/Response.js');
 var ConnectionHandler = function (io) {
 
 	this.io = io;
+	this.game = null;
 	this.connections = [];
-	this.connectionEventFactory = new ConnectionEventFactory();
-
-	this.init();
+	this.connectionEventFactory = new ConnectionEventFactory(this);
 
 }
 
-ConnectionHandler.prototype.init = function () {
+ConnectionHandler.prototype.init = function (game) {
 	var that = this;
+	this.game = game;
 
 	this.io.sockets.on('connection', function (socket) {
 		that.handleConnection(socket);
@@ -22,11 +22,12 @@ ConnectionHandler.prototype.init = function () {
 ConnectionHandler.prototype.handleConnection = function (socket) {
 	var that = this;
 	this.connections.push(socket);
+	var player = this.game.createPlayer(socket);
 
 	socket.emit('debug', process.env.DEBUG ? true : false);
 
 	socket.on('message', function (data) {
-		that.handleResponse(socket, that.callEventHandler(data));
+		that.callEventHandler(player, data);
 	});
 
 	socket.on('disconnect', function () {
@@ -49,11 +50,11 @@ ConnectionHandler.prototype.handleDisconnect = function (socket) {
 	this.connections = newConnections;
 }
 
-ConnectionHandler.prototype.callEventHandler = function (data) {
+ConnectionHandler.prototype.callEventHandler = function (player, data) {
 	var object = JSON.parse(data);
 	var handler = this.connectionEventFactory.getEventHandler(object.class);
 
-	return handler[object.method](object.data);
+	return handler[object.method](player, object.data);
 }
 
 ConnectionHandler.prototype.handleResponse = function (socket, response) {
