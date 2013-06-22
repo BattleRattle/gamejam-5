@@ -1,7 +1,7 @@
 var Player = function (socket) {
 
 	this.socket = socket;
-	this.level = 'simple';
+	this.level = 'tutorial';
 
 }
 
