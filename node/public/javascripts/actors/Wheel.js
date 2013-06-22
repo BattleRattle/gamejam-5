@@ -18,7 +18,7 @@ wheelActor = gamvas.Actor.extend({
 		//this.setCenter(64,32);
 
 		// a wheel is a moving object
-		this.bodyRect(this.position.x, this.position.y, 8, 2, gamvas.physics.DYNAMIC);
+		this.bodyRect(this.position.x, this.position.y, 16, 4, gamvas.physics.DYNAMIC);
 
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
