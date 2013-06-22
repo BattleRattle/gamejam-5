@@ -65,7 +65,7 @@ ConnectionHandler.prototype.handleResponse = function (socket, response) {
 	if (response.getType() === Response.prototype.TYPE_DIRECT) {
 		this.sendResponse(socket, response);
 	} else if (response.getType() === Response.prototype.TYPE_BROADCAST) {
-		this.sendBroadcast(response);
+		this.sendBroadcast(socket, response);
 	} else {
 		throw new Error('Response type not implemented: ' + response.getType());
 	}
@@ -75,8 +75,17 @@ ConnectionHandler.prototype.sendResponse = function (socket, response) {
 	socket.send(this.createRawResponse(response));
 }
 
-ConnectionHandler.prototype.sendBroadcast = function (response) {
-	this.io.sockets.send(this.createRawResponse(response));
+ConnectionHandler.prototype.sendBroadcast = function (socket, response) {
+	var player = this.game.getPlayerBySocket(socket);
+	if (!player) {
+		return;
+	}
+
+	var players = this.game.getPlayersOfSameLevel(player.getLevel());
+
+	for (var player in players) {
+		players[player].getSocket().send(this.createRawResponse(response));
+	}
 }
 
 ConnectionHandler.prototype.createRawResponse = function (response) {

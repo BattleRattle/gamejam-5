@@ -12,8 +12,6 @@ var Game = function(connectionHandler) {
 	this.dataLoaderFactory = new DataLoaderFactory();
 	this.players = [];
 
-//	this.dataLoaderFactory.getDataLoader('Level');
-
 	this.connectionHandler.init(this);
 
 }
@@ -24,7 +22,14 @@ Game.prototype.start = function() {
 
 	setInterval(function() {
 		var victimEventHandler = that.connectionEventFactory.getEventHandler(VictimEventHandler.CLASS_NAME);
-		victimEventHandler.push();
+		var referencePlayers = that.getOnePlayerForEveryLevel();
+		if (!referencePlayers.length) {
+			return;
+		}
+
+		for (var i in referencePlayers) {
+			victimEventHandler.push(referencePlayers[i]);
+		}
 	}, 1000);
 }
 
@@ -38,6 +43,48 @@ Game.prototype.createPlayer = function(socket) {
 	});
 
 	return player;
+}
+
+Game.prototype.getPlayersOfSameLevel = function(levelId) {
+	var foundPlayers = [];
+
+	for (var player in this.players) {
+		if (this.players[player].getLevel() === levelId) {
+			foundPlayers.push(this.players[player]);
+		}
+	}
+
+	return foundPlayers;
+}
+
+Game.prototype.getPlayerBySocket = function(socket) {
+	var foundPlayer = null;
+
+	for (var player in this.players) {
+		if (this.players[player].getSocket() === socket) {
+			foundPlayer = this.players[player];
+			break;
+		}
+	}
+
+	return foundPlayer;
+}
+
+Game.prototype.getOnePlayerForEveryLevel = function() {
+	var foundPlayers = [];
+	var alreadyFound = {};
+
+	for (var i in this.players) {
+		var player = this.players[i];
+		if (alreadyFound[player.getLevel()]) {
+			continue;
+		}
+
+		foundPlayers.push(player);
+		alreadyFound[player.getLevel()] = true;
+	}
+
+	return foundPlayers;
 }
 
 module.exports = Game;

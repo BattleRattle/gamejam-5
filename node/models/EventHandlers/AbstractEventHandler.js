@@ -19,9 +19,9 @@ AbstractEventHandler.prototype.createDirectResponse = function (player, remoteCl
 	this.connectionHandler.handleResponse(player.getSocket(), response);
 }
 
-AbstractEventHandler.prototype.createBroadcastResponse = function (remoteClass, method, data) {
+AbstractEventHandler.prototype.createBroadcastResponse = function (player, remoteClass, method, data) {
 	var response = new Response(remoteClass, method, Response.prototype.TYPE_BROADCAST, data);
-	this.connectionHandler.handleResponse(this.connectionHandler.io.sockets, response);
+	this.connectionHandler.handleResponse(player.getSocket(), response);
 }
 
 module.exports = AbstractEventHandler;
