@@ -1,3 +1,8 @@
+var Application = {
+	scenes: {
+
+	}
+}
 
 gamvas.event.addOnLoad(function() {
 	// some first fake full screen size
@@ -10,8 +15,9 @@ gamvas.event.addOnLoad(function() {
 	}
 
 	// add states here
+	Application.scenes["high_score"] = new highScoreScene('high_score');
 	gamvas.state.addState(new startScene('start'));
-	gamvas.state.addState(new highScoreScene('high_score'));
+	gamvas.state.addState(Application.scenes["high_score"]);
 	gamvas.state.addState(new levelScene('level'));
 
 

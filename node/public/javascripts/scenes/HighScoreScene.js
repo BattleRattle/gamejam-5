@@ -1,12 +1,17 @@
 highScoreScene = gamvas.State.extend({
 	init: function() {
-		console.log("high score");
 		this.dim = gamvas.getCanvasDimension();
+		this.highscoreData = null;
 
-		// assume our car (128px X 64px) is 4m X 2m
-		gamvas.physics.pixelsPerMeter = 32;
 	},
 
+	enter: function () {
+		handlerFactory.getHandler("HighScore").callGetHighScore();
+	},
+
+	setHighScoreData: function (data) {
+		this.highscoreData = data;
+	},
 
 	draw: function(t) {
 		// every state has this.c, which is the 2D context of the canvas
@@ -18,10 +23,17 @@ highScoreScene = gamvas.State.extend({
 		this.c.textAlign = 'center';
 		// draw the text (note that every state has a default
 		// camera that points to position 0/0)
-		this.c.fillText("Highscore!", 0, -200);
-		this.c.fillText("1. Captain Awesome - 10'000", 0, -150);
-		this.c.fillText("2. Major Awesome - 1'000", 0, -100);
-		this.c.fillText("3. Master Awesome - 100", 0, -50);
+		this.c.fillText("..:: Highscore ::..", 0, -200);
+		if (this.highscoreData == null) {
+			this.c.fillText("loading ...", 0, -150);
+		} else {
+			var minHeight = -150;
+			var stepHeight = 50;
+			for (var i = 0; i < this.highscoreData.length; i++, minHeight += stepHeight) {
+				var data = this.highscoreData[i];
+				this.c.fillText("" + (i + 1) + ". " + data.name + " :: " + data.points, 0, minHeight);
+			}
+		}
 	},
 
 	postDraw: function(t) {
