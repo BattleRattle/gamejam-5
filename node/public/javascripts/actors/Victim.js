@@ -11,13 +11,7 @@ victimActor = gamvas.Actor.extend({
 
 		//this.bodyRect(this.position.x, this.position.y, 25);
 
-		// get the current state, so we can acsess its resource loader with st.resource
-		var st = gamvas.state.getCurrentState();
-
-		// use the resource loader set the Gamvas logo as its single image
-		// every state has predefined variables, one of them is .resource, which is the resource handler
-		this.setFile(st.resource.getImage('images/victims/default.png'));
-
+		this.setFile(Application.images['default_victim']);
 		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.STATIC);
 	},
 

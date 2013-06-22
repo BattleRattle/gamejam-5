@@ -2,7 +2,8 @@ var Application = {
 	scenes: {
 
 	},
-	levelData: {}
+	levelData: {},
+	images: {}
 }
 
 gamvas.event.addOnLoad(function() {
@@ -32,4 +33,7 @@ gamvas.event.addOnLoad(function() {
 		var fs = document.getElementById('fullscreen');
 		fs.innerHTML = '<a href="javascript:void(0);" onclick="gamvas.setFullScreen(true);">Go FullScreen</a>';
 	}
+
+	var st = gamvas.state.getCurrentState();
+	Application.images['default_victim'] = st.resource.getImage('images/victims/default.png');
 });
