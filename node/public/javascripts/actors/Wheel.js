@@ -17,6 +17,9 @@ wheelActor = gamvas.Actor.extend({
 		// set the actors center point to its lower center
 		//this.setCenter(64,32);
 
+        this.density = 1.0;
+        this.restitution = 0.0;
+
 		// a wheel is a moving object
 		this.bodyRect(this.position.x, this.position.y, 16, 4, gamvas.physics.DYNAMIC);
 
@@ -34,12 +37,12 @@ wheelActor = gamvas.Actor.extend({
 	},
 
 	getForwardVelocity: function() {
-		var currentForwardNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(0, 1));
+		var currentForwardNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
 		return multiplyVec2D(currentForwardNormal, Box2D.Common.Math.b2Math.Dot(currentForwardNormal, this.body.GetLinearVelocity()));
 	},
 
 	getLateralVelocity: function() {
-		var currentRightNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+		var currentRightNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(0, -1));
 		return multiplyVec2D(currentRightNormal, Box2D.Common.Math.b2Math.Dot(currentRightNormal, this.body.GetLinearVelocity()));
 	},
 
@@ -57,7 +60,7 @@ wheelActor = gamvas.Actor.extend({
 		var currentForwardNormal = this.getForwardVelocity();
 
 		var currentForwardSpeed = currentForwardNormal.Normalize(); // FLOAT!!!1111
-		var dragForceMagnitude = -2 * currentForwardSpeed;
+		var dragForceMagnitude =  -2 * currentForwardSpeed;
 		this.body.ApplyForce(multiplyVec2D(currentForwardNormal, TRACTION * dragForceMagnitude), this.body.GetWorldCenter());
 	},
 

@@ -14,9 +14,6 @@ carActor = gamvas.Actor.extend({
 		// every state has predefined variables, one of them is .resource, which is the resource handler
 		this.setFile(st.resource.getImage('images/cars/green.png'));
 
-		// set the actors center point to its lower center
-		//this.setCenter(64,32);
-
         // a car is a moving object
         this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
 
@@ -27,8 +24,10 @@ carActor = gamvas.Actor.extend({
             new rearWheelActor("rear_right", -27, 23, this)
         ];
 
-		this.setAngularDamping(15);
-        this.setLinearDamping(10);
+        this.restitution = 0.1; // bounce
+        this.density = 0.3;
+        this.setAngularDamping(10);
+        this.setLinearDamping(6);
 
 /*		var massData = new Box2D.Collision.Shapes.b2MassData();
 		massData.mass = 50;
@@ -55,7 +54,7 @@ carActor = gamvas.Actor.extend({
 		gamvas.physics.getWorld().ClearForces();
 
 		var lockAngle = gamvas.math.degToRad(35);
-		var turnSpeedPerSec = gamvas.math.degToRad(180);
+		var turnSpeedPerSec = gamvas.math.degToRad(320);
 		var turnPerTimeStep = turnSpeedPerSec / 60;
 
 		var desiredAngle = 0;
@@ -76,14 +75,5 @@ carActor = gamvas.Actor.extend({
 		this.wheels.forEach(function(wheel) {
 			wheel.calculatePhysics(t);
 		});
-
-		//var velo = new Box2D.Common.Math.b2Vec2(0.5, 0.0);
-		/*var forward = new Box2D.Common.Math.b2Vec2(1.0, 0.0);
-
-		 var currentForwardNormal = this.actor.body.GetWorldVector(forward);
-
-		 var relativeVelo = this.actor.body.GetLocalVector(
-		 this.actor.body.GetLinearVelocityFromLocalPoint(
-		 new Box2D.Common.Math.b2Vec2(this.actor.position.x, this.actor.position.y)));*/
 	}
 });

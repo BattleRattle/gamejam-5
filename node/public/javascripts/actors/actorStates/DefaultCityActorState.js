@@ -31,7 +31,7 @@ defaultCityActorState = gamvas.ActorState.extend({
 			x += 512;
 		}
 
-		console.log (this.actors)
+		//console.log (this.actors)
 	},
 
 	draw: function (t) {
