@@ -10,8 +10,8 @@ sparkEmitter = gamvas.ParticleEmitter.extend({
         sparkimg.setCenter(16, 16);
         this.setImage(sparkimg);
 
-        // point upward
-        this.setRotation(Math.PI);
+
+        this.setParticleRate(100);
         // give the nozzle a little spreading angle
         this.setRotationRange(0.2);
         // particles start with a random rotation (0-360 degrees);
@@ -30,6 +30,6 @@ sparkEmitter = gamvas.ParticleEmitter.extend({
         // 70% lifetime, then even scale to 150% until end of lifetime
         this.setScaleTable([ [0.0, 0.7], [0.7, 1.0], [1.0, 1.5] ]);
         // particles live 10 seconds
-        this.setParticleLifeTime(2);
+        this.setParticleLifeTime(1);
     }
 });

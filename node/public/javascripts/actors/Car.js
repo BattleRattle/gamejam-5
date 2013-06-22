@@ -29,6 +29,10 @@ carActor = gamvas.Actor.extend({
         this.setAngularDamping(10);
         this.setLinearDamping(6);
 
+        this.MAX_HEALTH = 1000;
+
+        this.health = 1000;
+
 		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
@@ -47,6 +51,8 @@ carActor = gamvas.Actor.extend({
 		};
 		this.updateEveryMilliSeconds = 1000 / 10;
 		this.lastUpdateTime = 0;
+       this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
+
 	},
 
 	calculatePhysics: function(t) {
@@ -77,6 +83,51 @@ carActor = gamvas.Actor.extend({
 
 		this.updateServer(t);
 	},
+
+    onCollision: function(a, ni) {
+        if (ni > 20 ) {
+            this.health -= ni * 0.1;
+        }
+	},
+
+    drawDamage:function(t){
+        if(this.health < 0.0){
+
+            return;
+        }
+
+
+        if(this.health < this.MAX_HEALTH * 0.833){
+            this.sparks.setPosition(this.position.x, this.position.y);
+
+            var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+            this.sparks.setRotation(Math.acos(worldForwardVec.x) * Math.PI * 1.5);
+            this.sparks.draw(t);
+            return;
+
+        }
+
+        if(this.health < this.MAX_HEALTH * 0.5){
+
+            return;
+        }
+
+        if(this.health < this.MAX_HEALTH * 0.333){
+
+            return;
+        }
+
+        if(this.health < this.MAX_HEALTH * 0.166){
+
+            return;
+        }
+    },
+
+    draw:function(t){
+
+        this._super(t);
+        this.drawDamage(t);
+},
 
 	getForwardVelocity: function() {
 		if (!this.body) {
