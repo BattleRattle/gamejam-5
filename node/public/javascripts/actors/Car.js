@@ -104,8 +104,8 @@ carActor = gamvas.Actor.extend({
 		this.lastUpdateTime = 0;
 
 		var changed = false;
-		var xPosition = Math.round(this.position.x * 100) / 100;
-		var yPosition = Math.round(this.position.y * 100) / 100;
+		var xPosition = Math.round(this.body.GetPosition().x * 100) / 100;
+		var yPosition = Math.round(this.body.GetPosition().y * 100) / 100;
 
 		if (this.lastPosition.x !== xPosition) {
 			this.lastPosition.x = xPosition;
@@ -119,7 +119,8 @@ carActor = gamvas.Actor.extend({
 		if (changed) {
 			this.handler.callUpdatePosition({
 				'x': xPosition,
-				'y': yPosition
+				'y': yPosition,
+				'angle': Math.round(gamvas.math.radToDeg(this.body.GetAngle()))
 			});
 		}
 	}
