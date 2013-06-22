@@ -5,7 +5,8 @@ var ConnectionEventFactory = require('../ConnectionEventFactory'),
 	LevelGenerator = require('./LevelGenerator'),
 	VictimGod = require('../Victim/VictimGod');
 
-var levelGenerator = new LevelGenerator(new DataLoaderFactory());
+var dataLoaderFactory = new DataLoaderFactory();
+var levelGenerator = new LevelGenerator(dataLoaderFactory);
 
 var Level = function (levelId, connectionEventFactory) {
 	this.levelData = levelGenerator.getLevel(levelId);
@@ -13,7 +14,7 @@ var Level = function (levelId, connectionEventFactory) {
 	this.levelEventHandler = connectionEventFactory.getEventHandler(LevelEventHandler.CLASS_NAME);
 	this.victimEventHandler = connectionEventFactory.getEventHandler(VictimEventHandler.CLASS_NAME);
 
-	this.victimGod = new VictimGod(levelId, this.levelData);
+	this.victimGod = new VictimGod(this.levelData, dataLoaderFactory);
 	this.victimEventHandler.registerVictimGod(levelId, this.victimGod);
 
 	var that = this;
@@ -45,7 +46,7 @@ Level.prototype.removePlayer = function (player) {
 Level.prototype.spawnVictim = function () {
 	var victim = this.victimGod.buildVictim();
 
-	if (this.players.length > 0) {
+	if (this.players.length > 0 && victim) {
 		this.victimEventHandler.push(this.players[0], victim);
 	}
 };
