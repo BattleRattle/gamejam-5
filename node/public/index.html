@@ -2,7 +2,18 @@
 <html>
 <head>
 	<title></title>
-	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+    <script id="socketio"></script>
+    <script>
+        function getSocketIoLocation() {
+            return window.location.protocol + '//' + window.location.hostname + ':8080';
+        }
+        function getSocketIoUrl() {
+            return getSocketIoLocation() + '/socket.io/socket.io.js';;
+        }
+
+        document.getElementById('socketio').src = getSocketIoUrl();
+    </script>
+
 	<script src="javascripts/lib/Box2dWeb-2.1.a.3.js"></script>
 	<script src="javascripts/lib/gamvas.debug.js"></script>
 	<script src="javascripts/fixes/box2d-fix.js"></script>
@@ -17,6 +28,7 @@
 	<!-- Actors -->
 	<script src="javascripts/actors/Debug.js"></script>
 	<script src="javascripts/actors/Car.js"></script>
+	<script src="javascripts/actors/OtherCar.js"></script>
 	<script src="javascripts/actors/Wheel.js"></script>
 	<script src="javascripts/actors/FrontWheel.js"></script>
 	<script src="javascripts/actors/RearWheel.js"></script>
