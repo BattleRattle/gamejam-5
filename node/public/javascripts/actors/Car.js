@@ -18,7 +18,7 @@ carActor = gamvas.Actor.extend({
 		//this.setCenter(64,32);
 
         // a car is a moving object
-        this.bodyRect(this.position.x, this.position.y, 48, 24, gamvas.physics.DYNAMIC);
+        this.bodyRect(this.position.x, this.position.y, 96, 48, gamvas.physics.DYNAMIC);
 
 		this.wheels = [
 			new wheelActor("front_left", 0, 0, this),
@@ -29,10 +29,11 @@ carActor = gamvas.Actor.extend({
 
 		this.setAngularDamping(3);
 
-		this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(50, 30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(50, -30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(-50, 30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(-50, -30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+
+		this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(50), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(50), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-50), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-50), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 
 
 		// finally add the state to our actor

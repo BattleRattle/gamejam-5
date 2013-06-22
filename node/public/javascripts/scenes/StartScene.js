@@ -3,8 +3,8 @@ startScene = gamvas.State.extend({
 		console.log("start");
 		this.dim = gamvas.getCanvasDimension();
 
-        // assume our car (128px X 64px) is 4m X 2m
-        gamvas.physics.pixelsPerMeter = 32;
+        // assume our car (96px X 48px) is 4m X 2m
+        gamvas.physics.pixelsPerMeter = 24;
 	},
 
 
