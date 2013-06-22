@@ -18,8 +18,11 @@ debugActor = gamvas.Actor.extend({
 			this.c.textAlign = 'left';
 			// draw the text (note that every state has a default
 			// camera that points to position 0/0)
-			var x = (- this.dim.w / 2) + 20;
-			var y = (- this.dim.h / 2) + 30;
+			var cam = Application.scenes['level'].camera;
+			console.log(cam.zoomFactor);
+			var x = cam.position.x + (- this.dim.w / 2) / cam.zoomFactor + 20;
+			var y = cam.position.y + (- this.dim.h / 2) / cam.zoomFactor + 30;
+
 			this.c.fillText(fps, x, y);
 			this.c.fillText(objects, x, y + 15);
 
