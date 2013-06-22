@@ -20,7 +20,20 @@ carActor = gamvas.Actor.extend({
         // a car is a moving object
         this.bodyRect(this.position.x, this.position.y, 48, 24, gamvas.physics.DYNAMIC);
 
-        this.setLinearDamping(0.15);
+		this.wheels = [
+			new wheelActor("front_left", 0, 0, this),
+			new wheelActor("front_right", 0, 0, this),
+			new wheelActor("rear_left", 0, 0, this),
+			new wheelActor("rear_right", 0, 0, this)
+		];
+
+		this.setAngularDamping(3);
+
+		this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(50, 30));
+		this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(50, -30));
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(-50, 30));
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(-50, -30));
+
 
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
@@ -28,5 +41,20 @@ carActor = gamvas.Actor.extend({
 		// and switch to it (actors have a default state which does nothing)
 		this.setState('default');
 
+	},
+
+	calculatePhysics: function(t) {
+		this.wheels.forEach(function(wheel) {
+			wheel.calculatePhysics(t);
+		});
+
+		//var velo = new Box2D.Common.Math.b2Vec2(0.5, 0.0);
+		/*var forward = new Box2D.Common.Math.b2Vec2(1.0, 0.0);
+
+		 var currentForwardNormal = this.actor.body.GetWorldVector(forward);
+
+		 var relativeVelo = this.actor.body.GetLocalVector(
+		 this.actor.body.GetLinearVelocityFromLocalPoint(
+		 new Box2D.Common.Math.b2Vec2(this.actor.position.x, this.actor.position.y)));*/
 	}
 });
