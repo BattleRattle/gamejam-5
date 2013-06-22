@@ -12,7 +12,8 @@
 		"top-left",
 		"top-right",
 		"cs-right",
-		"cs-bottom"
+		"cs-bottom",
+		"crosswalk"
 	],
 	"size": {
 		"height": 10,

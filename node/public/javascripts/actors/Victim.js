@@ -20,8 +20,14 @@ victimActor = gamvas.Actor.extend({
 		this.config = config;
 		this.collided = false;
 
+		var st = gamvas.state.getCurrentState();
+		var imagePath = 'images/victims/' + config.data.image;
+		if (typeof Application.images[imagePath] == "undefined") {
+			Application.images[imagePath] = st.resource.getImage(imagePath);
+		}
+
 		this.addAnimation(
-			new gamvas.Animation('running', Application.images['default_victim'], 24, 24, 6, 9)
+			new gamvas.Animation('running', Application.images[imagePath], 24, 24, 6, 9)
 		);
 
 		this.setAnimation("running");
@@ -41,13 +47,6 @@ victimActor = gamvas.Actor.extend({
 //		}
 
 		this.setPosition(this.currentPosition.x, this.currentPosition.y);
-//		if(this.direction.x )
-
-
-//		var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
-//		var worldDirVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(this.direction.x, this.direction.y));
-//		this.setRotation(Math.acos(worldDirVec.x) - Math.acos(worldForwardVec.x) + 0.5 * Math.PI);
-
 		this.setRotation((this.direction.x === 0.0) ? Math.asin(this.direction.y) : Math.acos(this.direction.x));
 	},
 
