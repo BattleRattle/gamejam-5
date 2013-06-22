@@ -1,5 +1,6 @@
 levelScene = gamvas.State.extend({
 	init: function() {
+		this.init = true;
 		this.victims = [];
 
 		this.dim = gamvas.getCanvasDimension();
@@ -16,9 +17,11 @@ levelScene = gamvas.State.extend({
 	},
 
 	addVictim: function (data) {
-		var victim = new victimActor("victim" + data.id, data.x, data.y, data);
-		this.victims[data.id] = victim;
-		this.addActor(victim);
+		if (this.init) {
+			var victim = new victimActor("victim" + data.id, data.x, data.y, data);
+			this.victims[data.id] = victim;
+			this.addActor(victim);
+		}
 	},
 
 	removeVictim: function (data) {
