@@ -3,7 +3,7 @@ carActor = gamvas.Actor.extend({
 	// we add a extra parameter name file, which a normal gamvas.Actor does not have.
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
-	create: function(name, x, y, file) {
+	create: function(name, x, y, config) {
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 
@@ -30,10 +30,10 @@ carActor = gamvas.Actor.extend({
 		this.setAngularDamping(3);
 
 
-		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(50), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(50), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-50), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-50), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(25), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(25), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-26), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-26), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 
 
 		// finally add the state to our actor
