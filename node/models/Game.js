@@ -1,4 +1,3 @@
-var ConnectionEventFactory = require('./ConnectionEventFactory.js');
 var Response = require('./Communication/Response.js');
 var DataLoaderFactory = require('./DataLoaderFactory.js');
 var Player = require('./Player.js'),
