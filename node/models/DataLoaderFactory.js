@@ -1,6 +1,7 @@
 var MapTileDataLoader = require('./Map/MapTileDataLoader'),
 	MapDataLoader = require('./Map/MapDataLoader'),
-	LevelDataLoader = require('./Level/LevelDataLoader');
+	LevelDataLoader = require('./Level/LevelDataLoader'),
+	CarDataLoader = require('./Car/CarDataLoader');
 
 var DataLoaderFactory = function() {
 
@@ -24,6 +25,10 @@ DataLoaderFactory.prototype.getDataLoader = function(dataLoader) {
 
 		case 'Level':
 			this.dataLoader[dataLoader] = new LevelDataLoader();
+			break;
+
+		case 'Car':
+			this.dataLoader[dataLoader] = new CarDataLoader();
 			break;
 
 		default:

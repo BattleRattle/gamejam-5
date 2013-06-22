@@ -8,7 +8,7 @@ var loadData = function () {
 		var stats = fs.lstatSync(pathToData + "/" + levelJson);
 		if (!stats.isDirectory() && fs.existsSync(pathToData + "/" + levelJson)) {
 			var data = require(pathToData + "/" + levelJson);
-			levels[data.name] = data;
+			levels[data.id] = data;
 		}
 	});
 
@@ -19,7 +19,7 @@ var LevelDataLoader = function() {
 	this.levels = loadData();
 
 	for (var level in this.levels) {
-		if (level.default) {
+		if (this.levels[level].default) {
 			this.defaultLevel = level.name;
 		}
 	}

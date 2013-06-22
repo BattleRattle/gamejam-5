@@ -8,7 +8,7 @@ var loadData = function () {
 		var stats = fs.lstatSync(pathToData + "/" + mapJson);
 		if (!stats.isDirectory() && fs.existsSync(pathToData + "/" + mapJson)) {
 			var data = require(pathToData + "/" + mapJson);
-			maps[data.name] = data;
+			maps[data.id] = data;
 		}
 	});
 
@@ -19,7 +19,7 @@ var MapDataLoader = function() {
 	this.maps = loadData();
 
 	for (var map in this.maps) {
-		if (map.default) {
+		if (this.maps[map].default) {
 			this.defaultMap = map.name;
 		}
 	}

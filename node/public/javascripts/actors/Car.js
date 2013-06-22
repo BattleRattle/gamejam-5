@@ -12,7 +12,7 @@ carActor = gamvas.Actor.extend({
 
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
-		this.setFile(st.resource.getImage('images/car.png'));
+		this.setFile(st.resource.getImage('images/cars/green.png'));
 
 		// set the actors center point to its lower center
 		//this.setCenter(64,32);

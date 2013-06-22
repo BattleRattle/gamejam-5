@@ -16,7 +16,7 @@ MapGenerator.prototype.getMap = function (mapId) {
 };
 
 MapGenerator.prototype.generateMap = function (mapId) {
-	var levelDataLoader = this.dataLoaderFactory.getDataLoader('Map');
+	var mapDataLoader = this.dataLoaderFactory.getDataLoader('Map');
 	var mapTileDataLoader = this.dataLoaderFactory.getDataLoader('MapTiles');
 
 	var map = {
@@ -27,9 +27,9 @@ MapGenerator.prototype.generateMap = function (mapId) {
 	};
 
 	var groupedTileSets = {};
-	var levelData = levelDataLoader.getData(mapId);
-	for (var i = levelData.tilesets.length - 1; i >= 0; i--) {
-		var tile = mapTileDataLoader.getData(levelData.tilesets[i]);
+	var mapData = mapDataLoader.getData(mapId);
+	for (var i = mapData.tilesets.length - 1; i >= 0; i--) {
+		var tile = mapTileDataLoader.getData(mapData.tilesets[i]);
 		if (typeof groupedTileSets[tile.position] == "undefined") {
 			groupedTileSets[tile.position] = [];
 		}
@@ -37,7 +37,7 @@ MapGenerator.prototype.generateMap = function (mapId) {
 		groupedTileSets[tile.position].push(tile);
 	}
 
-	map.size = levelData.size;
+	map.size = mapData.size;
 
 	var width = map.size.width;
 	var height = map.size.height;

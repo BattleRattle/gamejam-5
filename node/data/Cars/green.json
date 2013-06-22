@@ -1,0 +1,9 @@
+{
+	"id": "green",
+	"image": "images/car.png",
+	"collisionBox": {
+		"width": 48,
+		"height": 24
+	},
+	"default": true
+}

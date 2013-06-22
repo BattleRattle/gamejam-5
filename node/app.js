@@ -45,4 +45,3 @@ var fac = new DataLoaderFactory();
 var mapGen = new LevelGenerator(fac);
 
 var level = mapGen.getLevel("tutorial");
-true;

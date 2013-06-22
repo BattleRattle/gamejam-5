@@ -20,7 +20,7 @@ var MapTileDataLoader = function() {
 
 	for (var tile in this.tiles) {
 		if (tile.default) {
-			this.defaultLevel = tile.name;
+			this.defaultCar = tile.name;
 		}
 	}
 }

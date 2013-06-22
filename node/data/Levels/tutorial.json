@@ -1,4 +1,6 @@
 {
 	"id": "tutorial",
-	"mapId": "simple"
+	"default": true,
+	"mapId": "simple",
+	"carId": "green"
 }
