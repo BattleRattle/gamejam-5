@@ -2,5 +2,8 @@
 	"id": "tutorial",
 	"default": true,
 	"mapId": "simple",
-	"carId": "green"
+	"carId": "green",
+	"victims": [
+		"default"
+	]
 }

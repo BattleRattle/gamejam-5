@@ -21,6 +21,11 @@ LevelGenerator.prototype.generateLevel = function (levelId) {
 		car: this.dataLoaderFactory.getDataLoader("Car").getData(levelData.carId)
 	}
 
+	// validate all the victims
+	for (var i = levelData.victims.length - 1; i >= 0; i--) {
+		this.dataLoaderFactory.getDataLoader("Victim").getData(levelData.victims[i]);
+	}
+
 	return level;
 };
 

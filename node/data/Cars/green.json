@@ -1,6 +1,6 @@
 {
 	"id": "green",
-	"image": "images/car.png",
+	"image": "green.png",
 	"collisionBox": {
 		"width": 48,
 		"height": 24
