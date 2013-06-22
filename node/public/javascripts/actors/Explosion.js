@@ -11,11 +11,11 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		this.setImage(fireimg);
 
 		// stop after 25 particles are emitted
-		this.setParticleLimit(25);
+		this.setParticleLimit(2500);
 
 		// emit 300 particles per second with the limit of 25
 		// this emitter will emit 1/12 of a second
-		this.setParticleRate(300);
+		this.setParticleRate(15000);
 
 		// emitt in all directions
 		this.setRotationRange(2*Math.PI);
@@ -25,8 +25,8 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		// continue rotation in a slow speed
 		this.setParticleRotationVelocityRange(0.5);
 		// emit with 100-200 pixels per second (150 + range of +/- 50)
-		this.setParticleSpeed(150);
-		this.setParticleSpeedRange(50);
+		this.setParticleSpeed(200);
+		this.setParticleSpeedRange(150);
 		// fade quickly in to alpha of 0.4, then slowly out to 0
 		this.setAlphaTable([ [0.0, 0.0], [0.03, 0.4], [1.0, 0.0]]);
 		// quickly scale to 70% size, then at 70% lifetime get 100% size
@@ -46,11 +46,11 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		this.smoke.setImage(smokeimg);
 		this.smoke.setRotationRange(2*Math.PI);
 		// emit maximum of 50 (double as much as fire particles)
-		this.smoke.setParticleLimit(50);
-		this.smoke.setParticleRate(300);
+		this.smoke.setParticleLimit(2500);
+		this.smoke.setParticleRate(15000);
 		// particles are emitted with a speed range of 0-160 pixels per second
-		this.smoke.setParticleSpeed(80);
-		this.smoke.setParticleSpeedRange(80);
+		this.smoke.setParticleSpeed(200);
+		this.smoke.setParticleSpeedRange(200);
 		this.smoke.setParticleRotationRange(2*Math.PI);
 		this.smoke.setParticleRotationVelocityRange(0.5);
 		// the insert ot 0.7, 0.1 gives a bit better result for smoke
