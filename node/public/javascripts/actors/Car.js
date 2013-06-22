@@ -30,8 +30,8 @@ carActor = gamvas.Actor.extend({
 		this.setAngularDamping(3);
 
 		var massData = new Box2D.Collision.Shapes.b2MassData();
-		massData.mass = 1500;
-		massData.I = 0;
+		massData.mass = 50;
+		massData.I = 50;
 		massData.center.x = 0;
 		massData.center.y = 0;
 		this.body.SetMassData(massData);
@@ -51,9 +51,11 @@ carActor = gamvas.Actor.extend({
 	},
 
 	calculatePhysics: function(t) {
+		gamvas.physics.getWorld().ClearForces();
+
 		var lockAngle = gamvas.math.degToRad(35);
 		var turnSpeedPerSec = gamvas.math.degToRad(160);
-		var turnPerTimeStep = turnSpeedPerSec * 1000 / t;
+		var turnPerTimeStep = turnSpeedPerSec / 60;
 
 		var desiredAngle = 0;
 		if (gamvas.key.isPressed(gamvas.key.LEFT)) {
@@ -82,6 +84,5 @@ carActor = gamvas.Actor.extend({
 		 var relativeVelo = this.actor.body.GetLocalVector(
 		 this.actor.body.GetLinearVelocityFromLocalPoint(
 		 new Box2D.Common.Math.b2Vec2(this.actor.position.x, this.actor.position.y)));*/
-	},
-
+	}
 });

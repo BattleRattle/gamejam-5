@@ -44,20 +44,21 @@ wheelActor = gamvas.Actor.extend({
 	},
 
 	updateFriction: function() {
+		var TRACTION = 1;
 		var MAX_LATERAL_IMPULSE = this.getCharacteristics().maxLateralImpulse;
 
 		var impulse = multiplyVec2D(this.getLateralVelocity(), -this.body.GetMass());
 		if (impulse.Length() > MAX_LATERAL_IMPULSE) {
 			impulse = multiplyVec2D(impulse, MAX_LATERAL_IMPULSE / impulse.Length());
 		}
-		this.body.ApplyImpulse(impulse, this.body.GetWorldCenter());
+		this.body.ApplyImpulse(multiplyVec2D(impulse, TRACTION), this.body.GetWorldCenter());
 
-		this.body.ApplyAngularImpulse(0.1 * this.body.GetInertia() * -this.body.GetAngularVelocity()); // FLOAT!!!
+		this.body.ApplyAngularImpulse(TRACTION * 0.1 * this.body.GetInertia() * -this.body.GetAngularVelocity()); // FLOAT!!!
 		var currentForwardNormal = this.getForwardVelocity();
 
 		var currentForwardSpeed = currentForwardNormal.Normalize(); // FLOAT!!!1111
 		var dragForceMagnitude = -2 * currentForwardSpeed;
-		this.body.ApplyForce(multiplyVec2D(currentForwardNormal, dragForceMagnitude), this.body.GetWorldCenter());
+		this.body.ApplyForce(multiplyVec2D(currentForwardNormal, TRACTION * dragForceMagnitude), this.body.GetWorldCenter());
 	},
 
 	updateDrive: function() {

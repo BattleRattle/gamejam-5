@@ -1,8 +1,8 @@
 frontWheelActor = wheelActor.extend({
 	getCharacteristics: function() {
 		return {
-			maxForwardSpeed: 100,
-			maxBackwardSpeed: -20,
+			maxForwardSpeed: 250,
+			maxBackwardSpeed: -40,
 			maxDriveForce: 500,
 			maxLateralImpulse: 7.5
 		}
