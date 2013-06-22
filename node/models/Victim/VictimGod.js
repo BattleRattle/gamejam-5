@@ -37,7 +37,12 @@ VictimGod.prototype.buildVictim = function () {
 };
 
 VictimGod.prototype.selectVictim = function () {
-	var victimId = this.levelData.victims[0];
+	if (this.levelData.victims.length == 1) {
+		var victimId = this.levelData.victims[0];
+	} else {
+		var rand = getRandomInt(0, this.levelData.victims.length - 1);
+		var victimId = this.levelData.victims[rand];
+	}
 
 	return this.victimDataLoaderFactory.getData(victimId);
 };
