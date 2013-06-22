@@ -7,7 +7,7 @@ var Player = require('./Player.js'),
 var Game = function(connectionHandler) {
 
 	this.connectionHandler = connectionHandler;
-	this.connectionEventFactory = new ConnectionEventFactory(connectionHandler);
+	this.connectionEventFactory = this.connectionHandler.connectionEventFactory;
 	this.dataLoaderFactory = new DataLoaderFactory();
 	this.players = [];
 	this.levels = {};
@@ -32,7 +32,7 @@ Game.prototype.createPlayer = function(socket) {
 
 Game.prototype.getLevel = function (levelId) {
 	if (!this.levels[levelId]) {
-		this.levels[levelId] = new Level(levelId, this.connectionHandler);
+		this.levels[levelId] = new Level(levelId, this.connectionEventFactory);
 	}
 
 	return this.levels[levelId];

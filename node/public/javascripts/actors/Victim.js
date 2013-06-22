@@ -18,7 +18,7 @@ victimActor = gamvas.Actor.extend({
 	onCollisionEnter: function(a) {
 		if (!this.collided) {
 			this.collided = true;
-			handlerFactory.getHandler("Victim").callCollide({id: this.config.id});
+			handlerFactory.getHandler("Victim").callCollide(this.config);
 			console.log("i got hit by "+a.name);
 		}
 	}

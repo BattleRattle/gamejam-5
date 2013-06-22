@@ -1,9 +1,7 @@
 var AbstractEventHandler = require('./AbstractEventHandler.js');
 
 var VictimEventHandler = function () {
-
-	this.victimCounter = 0;
-	this.victims = [];
+	this.victimGods = {};
 
 }
 
@@ -14,18 +12,14 @@ VictimEventHandler.prototype.push = function (player, victim) {
 	return this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'push', victim);
 }
 
+VictimEventHandler.prototype.registerVictimGod = function (levelId, victimGod) {
+	this.victimGods[levelId] = victimGod;
+};
+
 VictimEventHandler.prototype.collide = function (player, data) {
-	var newVictims = [];
-
-	/*for (var victim in this.victims) {
-		if (victim.id === data.id) {
-			continue;
-		}
-
-		newVictims.push(victim);
+	if (this.victimGods[data.levelId]) {
+		this.victimGods[data.levelId].removeKilledVictim(data.id);
 	}
-
-	this.victims = newVictims;*/
 
 	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {
 		'id': data.id
