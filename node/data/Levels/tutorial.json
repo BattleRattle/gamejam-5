@@ -8,5 +8,6 @@
 		"yellow",
 		"default",
 		"pink"
-	]
+	],
+	"maxVictims": 200
 }

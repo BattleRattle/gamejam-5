@@ -19,7 +19,9 @@ var Level = function (levelId, connectionEventFactory) {
 
 	var that = this;
 	setInterval(function() {
-		that.spawnVictim();
+		if (that.victimGod.victims.length < that.levelData.maxVictims) {
+			that.spawnVictim();
+		}
 	}, 1000);
 };
 

@@ -16,19 +16,15 @@ LevelGenerator.prototype.getLevel = function (levelId) {
 
 LevelGenerator.prototype.generateLevel = function (levelId) {
 	var levelData = this.dataLoaderFactory.getDataLoader("Level").getData(levelId);
-	var level = {
-		levelId: levelId,
-		map: this.mapGenerator.getMap(levelData.mapId),
-		car: this.dataLoaderFactory.getDataLoader("Car").getData(levelData.carId),
-		victims: levelData.victims
-	}
+	levelData.map = this.mapGenerator.getMap(levelData.mapId);
+	levelData.car = this.dataLoaderFactory.getDataLoader("Car").getData(levelData.carId);
 
 	// validate all the victims
 	for (var i = levelData.victims.length - 1; i >= 0; i--) {
 		this.dataLoaderFactory.getDataLoader("Victim").getData(levelData.victims[i]);
 	}
 
-	return level;
+	return levelData;
 };
 
 module.exports = LevelGenerator;
