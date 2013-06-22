@@ -20,8 +20,6 @@ wheelActor = gamvas.Actor.extend({
 		// a wheel is a moving object
 		this.bodyRect(this.position.x, this.position.y, 8, 2, gamvas.physics.DYNAMIC);
 
-		this.setLinearDamping(0.15);
-
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
 
@@ -64,9 +62,9 @@ wheelActor = gamvas.Actor.extend({
 	},
 
 	updateDrive: function() {
-		var MAX_FORWARD_SPEED = 100;
-		var MAX_BACKWARD_SPEED = -20;
-		var MAX_DRIVE_FORCE = 150;
+		var MAX_FORWARD_SPEED = 10;
+		var MAX_BACKWARD_SPEED = -2;
+		var MAX_DRIVE_FORCE = 1.5;
 
 		var desiredSpeed = 0;
 		if (gamvas.key.isPressed(gamvas.key.UP)) {

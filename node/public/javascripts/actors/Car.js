@@ -29,10 +29,10 @@ carActor = gamvas.Actor.extend({
 
 		this.setAngularDamping(3);
 
-		this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(50, 30));
-		this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(50, -30));
-		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(-50, 30));
-		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(-50, -30));
+		this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(50, 30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(50, -30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(-50, 30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(-50, -30), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 
 
 		// finally add the state to our actor

@@ -22,6 +22,8 @@ debugActor = gamvas.Actor.extend({
 			var y = (- this.dim.h / 2) + 30;
 			this.c.fillText(fps, x, y);
 			this.c.fillText(objects, x, y + 15);
+
+            gamvas.physics.drawDebug();
 		};
 
 		defaultState.onMouseDown = function(b, x, y) {
