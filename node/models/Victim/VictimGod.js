@@ -1,24 +1,55 @@
-var VictimGod = function(levelId, levelData) {
-	console.log("victim god", levelId)
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var VictimGod = function(levelData, dataLoaderFactory) {
 	this.victims = [];
 	this.victimCounter = 0;
 
-	this.levelId = levelId;
+	this.levelId = levelData.leveId;
 	this.levelData = levelData;
+
+	this.victimDataLoaderFactory = dataLoaderFactory.getDataLoader('Victim');
 };
 
 VictimGod.prototype.buildVictim = function () {
-	var victim = {
-		'id': this.levelId + ++this.victimCounter,
-		'levelId': this.levelId,
-		'x': 25,// * this.victimCounter,
-		'y': 25,// * this.victimCounter
-	};
+	var victimData = this.selectVictim();
+	var path = this.selectPath(5, 5);
 
-	this.victims.push(victim);
+	if (path) {
+		var counter = ++this.victimCounter;
+		var victim = {
+			'id': this.levelId + "" + counter,
+			'levelId': this.levelId,
+			'data': victimData,
+			'tileset': {
+				x: 5,
+				y: 5
+			},
+			'path': path
+		};
 
-	return victim;
+		this.victims.push(victim);
+
+		return victim;
+	}
+
 };
+
+VictimGod.prototype.selectVictim = function () {
+	return this.levelData.victims[0];
+};
+
+VictimGod.prototype.selectPath = function (x, y) {
+	var tilename = this.levelData.map.tiles[x][y];
+
+	var tileset = this.levelData.map.tilesets[tilename];
+
+	if (tileset.paths) {
+		var rand = getRandomInt(0, tileset.paths.length - 1);
+		return tileset.paths[rand];
+	}
+}
 
 VictimGod.prototype.removeKilledVictim = function (victimId) {
 	var newVictims = [];
