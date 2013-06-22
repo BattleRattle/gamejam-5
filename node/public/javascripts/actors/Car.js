@@ -52,6 +52,7 @@ carActor = gamvas.Actor.extend({
 		this.updateEveryMilliSeconds = 1000 / 10;
 		this.lastUpdateTime = 0;
        this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
+       this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);
 
 	},
 
@@ -97,14 +98,19 @@ carActor = gamvas.Actor.extend({
         }
 
 
-        if(this.health < this.MAX_HEALTH * 0.833){
+        if(this.health < this.MAX_HEALTH * 0.166){
             this.sparks.setPosition(this.position.x, this.position.y);
 
             var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
             this.sparks.setRotation(Math.acos(worldForwardVec.x) * Math.PI * 1.5);
             this.sparks.draw(t);
             return;
+        }
 
+
+        if(this.health < this.MAX_HEALTH * 0.333){
+
+            return;
         }
 
         if(this.health < this.MAX_HEALTH * 0.5){
@@ -112,13 +118,12 @@ carActor = gamvas.Actor.extend({
             return;
         }
 
-        if(this.health < this.MAX_HEALTH * 0.333){
+        if(this.health < this.MAX_HEALTH * 0.833){
+            this.smoke.setPosition(this.position.x, this.position.y);
 
-            return;
-        }
-
-        if(this.health < this.MAX_HEALTH * 0.166){
-
+            var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+            this.smoke.setRotation(Math.acos(worldForwardVec.x) * Math.PI * 1.5);
+            this.smoke.draw(t);
             return;
         }
     },
