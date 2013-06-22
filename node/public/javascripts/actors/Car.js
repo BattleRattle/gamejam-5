@@ -3,7 +3,7 @@ carActor = gamvas.Actor.extend({
 	// we add a extra parameter name file, which a normal gamvas.Actor does not have.
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
-	create: function(name, x, y, config) {
+	create: function(name, x, y, file) {
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 
@@ -12,7 +12,7 @@ carActor = gamvas.Actor.extend({
 
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
-		this.setFile(st.resource.getImage('images/cars/' + config.image));
+		this.setFile(st.resource.getImage('images/cars/green.png'));
 
 		// set the actors center point to its lower center
 		//this.setCenter(64,32);
@@ -20,12 +20,12 @@ carActor = gamvas.Actor.extend({
         // a car is a moving object
         this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
 
-		this.wheels = [
-			new wheelActor("front_left", 0, 0, this),
-			new wheelActor("front_right", 0, 0, this),
-			new wheelActor("rear_left", 0, 0, this),
-			new wheelActor("rear_right", 0, 0, this)
-		];
+        this.wheels = [
+            new wheelActor("front_left", 25, -29, this),
+            new wheelActor("front_right", 25, 29, this),
+            new wheelActor("rear_left", -26, -29, this),
+            new wheelActor("rear_right", -26, 29, this)
+        ];
 
 		this.setAngularDamping(3);
 
