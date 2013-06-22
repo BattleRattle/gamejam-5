@@ -17,6 +17,10 @@ PlayerEventHandler.prototype.updatePosition = function (player, data) {
 		'y': data.y,
 		'angle': data.angle
 	});
-}
+};
+
+PlayerEventHandler.prototype.letMeDie = function (player, data) {
+	console.log("player:", player.playerId, "died")
+};
 
 module.exports = PlayerEventHandler;

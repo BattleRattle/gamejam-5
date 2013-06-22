@@ -94,9 +94,7 @@ carActor = gamvas.Actor.extend({
 
     drawDamage:function(t){
         if(this.health < 0.0){
-
-            Application.scenes['level'].addActor(new explosionEmitter("boom", this.position.x, this.position.y));
-            Application.scenes['level'].removeActor(this);
+			this.removeActor(this, this.position.x, this.position.y);
 
             return;
         }
@@ -175,6 +173,13 @@ carActor = gamvas.Actor.extend({
 				'angle': Math.round(gamvas.math.radToDeg(this.body.GetAngle()))
 			});
 		}
+	},
+
+	removeActor: function(elem, x, y) {
+		Application.scenes['level'].addActor(new explosionEmitter("boom", x, y));
+		Application.scenes['level'].removeActor(elem);
+
+		handlerFactory.getHandler('Player').callLetMeDie(this.config);
 	}
 
 });
