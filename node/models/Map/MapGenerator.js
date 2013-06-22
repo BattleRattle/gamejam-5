@@ -42,21 +42,23 @@ MapGenerator.prototype.generateMap = function (mapId) {
 	var width = map.size.width;
 	var height = map.size.height;
 	for (var x = 0; x < width; x++) {
-		var firstLevelPosition = "";
+		var secondLevelPosition = "";
 		if (0 == x) {
-			firstLevelPosition += "N";
+			secondLevelPosition += "W";
 		} else if (width - 1 == x) {
-			firstLevelPosition += "S";
+			secondLevelPosition += "E";
 		}
 
 		map.tiles[x] = [];
 		for (var y = 0; y < height; y++) {
-			var position = firstLevelPosition;
+			var firstLevelPosition = "";
 			if (y == 0) {
-				position += "W";
+				firstLevelPosition += "N";
 			} else if (y == height - 1) {
-				position += "E";
+				firstLevelPosition += "S";
 			}
+
+			var position = firstLevelPosition + secondLevelPosition;
 
 			if (position == "") {
 				position = "*";

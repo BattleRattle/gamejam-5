@@ -1,14 +1,14 @@
 {
 	"id": "bottom-left",
 	"image": "tile-bottom-left.jpg",
-	"position": "SW",
+	"position": "NE",
 	"collisions": [
 		{
 			"type": "rect",
 			"x": 352,
-			"y": 136,
+			"y": 160,
 			"width": 24,
-			"height": 376
+			"height": 352
 		},
 		{
 			"type": "rect",

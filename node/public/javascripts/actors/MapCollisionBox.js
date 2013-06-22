@@ -10,9 +10,9 @@ mapCollisionBoxActor = gamvas.Actor.extend({
 		this.collided = false;
 
 		if (config.type == "rect") {
-			this.bodyRect(this.position.x, this.position.y, config.width, config.height, gamvas.physics.STATIC);
+			this.bodyRect(this.position.x + config.width / 2, this.position.y + config.height / 2, config.width, config.height, gamvas.physics.STATIC);
 		} else if (config.type == "circle") {
-			this.bodyRect(this.position.x, this.position.y, config.radius, gamvas.physics.STATIC);
+			this.bodyRect(this.position.x + config.radius / 2, this.position.y + config.radius / 2, config.radius, gamvas.physics.STATIC);
 		}
 
 	},

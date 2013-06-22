@@ -1,7 +1,7 @@
 {
 	"id": "top-left",
 	"image": "tile-top-left.jpg",
-	"position": "NW",
+	"position": "SE",
 	"collisions": [
 		{
 			"type": "rect",
@@ -13,7 +13,7 @@
 		{
 			"type": "rect",
 			"x": 0,
-			"y": 376,
+			"y": 352,
 			"width": 352,
 			"height": 24
 		},
