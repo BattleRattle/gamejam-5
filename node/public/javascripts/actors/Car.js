@@ -15,13 +15,14 @@ carActor = gamvas.Actor.extend({
 		this.setFile(st.resource.getImage('images/cars/green.png'));
 
         // a car is a moving object
+		this.position.y -= 250;
         this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
 
         this.wheels = [
-            new frontWheelActor("front_left", 27, -23, this),
-            new frontWheelActor("front_right", 27, 23, this),
-            new rearWheelActor("rear_left", -27, -23, this),
-            new rearWheelActor("rear_right", -27, 23, this)
+            new frontWheelActor("front_left", 27, -23 -250, this),
+            new frontWheelActor("front_right", 27, 23-250, this),
+            new rearWheelActor("rear_left", -27, -23-250, this),
+            new rearWheelActor("rear_right", -27, 23-250, this)
         ];
 
         this.restitution = 0.1; // bounce
@@ -33,10 +34,10 @@ carActor = gamvas.Actor.extend({
 
         this.health = 1000;
 
-		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-22 -250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(22-250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(-22-250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(22-250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
