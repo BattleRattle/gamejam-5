@@ -19,7 +19,6 @@ debugActor = gamvas.Actor.extend({
 			// draw the text (note that every state has a default
 			// camera that points to position 0/0)
 			var cam = Application.scenes['level'].camera;
-			console.log(cam.zoomFactor);
 			var x = cam.position.x + (- this.dim.w / 2) / cam.zoomFactor + 20;
 			var y = cam.position.y + (- this.dim.h / 2) / cam.zoomFactor + 30;
 
