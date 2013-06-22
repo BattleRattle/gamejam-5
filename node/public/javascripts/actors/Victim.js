@@ -34,6 +34,7 @@ victimActor = gamvas.Actor.extend({
 		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
 
 		this.preDraw(0);
+		this.setGroupIndex(-1)
 	},
 
 	preDraw: function(t) {

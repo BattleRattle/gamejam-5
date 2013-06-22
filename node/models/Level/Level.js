@@ -20,7 +20,7 @@ var Level = function (levelId, connectionEventFactory) {
 	var that = this;
 	setInterval(function() {
 		that.spawnVictim();
-	}, 5000);
+	}, 1000);
 };
 
 Level.prototype.addPlayer = function (player) {
