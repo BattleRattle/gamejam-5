@@ -3,5 +3,5 @@ var VictimMessageHandler = function (socket) {
 };
 
 VictimMessageHandler.prototype.push = function (data) {
-	console.log (data);
+	//console.log (data);
 }

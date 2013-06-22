@@ -3,7 +3,7 @@ var fs = require("fs"),
 
 var loadData = function () {
 	var tiles = {};
-	var pathToData = path.normalize(__dirname + "/../../data/map");
+	var pathToData = path.normalize(__dirname + "/../../data/MapTiles");
 	fs.readdirSync(pathToData).forEach(function (tileJson) {
 		var stats = fs.lstatSync(pathToData + "/" + tileJson);
 		if (!stats.isDirectory() && fs.existsSync(pathToData + "/" + tileJson)) {

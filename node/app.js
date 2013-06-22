@@ -11,7 +11,7 @@ var express = require('express'),
 	Game = require('./models/Game.js');
 
 var DataLoaderFactory = require('./models/DataLoaderFactory'),
-	MapGenerator = require('./models/Map/MapGenerator');
+	LevelGenerator = require('./models/Level/LevelGenerator');
 
 var app = express();
 
@@ -41,7 +41,8 @@ connectionHandler = new connectionHandler(io);
 var game = new Game(connectionHandler);
 game.start();
 
-/*var fac = new DataLoaderFactory();
-var mapGen = new MapGenerator(fac);
+var fac = new DataLoaderFactory();
+var mapGen = new LevelGenerator(fac);
 
-mapGen.getMap("tutorial");*/
+var level = mapGen.getLevel("tutorial");
+true;

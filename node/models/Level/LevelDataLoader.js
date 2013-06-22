@@ -3,7 +3,7 @@ var fs = require("fs"),
 
 var loadData = function () {
 	var levels = {};
-	var pathToData = path.normalize(__dirname + "/../../data/level");
+	var pathToData = path.normalize(__dirname + "/../../data/Levels");
 	fs.readdirSync(pathToData).forEach(function (levelJson) {
 		var stats = fs.lstatSync(pathToData + "/" + levelJson);
 		if (!stats.isDirectory() && fs.existsSync(pathToData + "/" + levelJson)) {

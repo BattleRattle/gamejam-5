@@ -16,7 +16,7 @@ MapGenerator.prototype.getMap = function (mapId) {
 };
 
 MapGenerator.prototype.generateMap = function (mapId) {
-	var levelDataLoader = this.dataLoaderFactory.getDataLoader('Level');
+	var levelDataLoader = this.dataLoaderFactory.getDataLoader('Map');
 	var mapTileDataLoader = this.dataLoaderFactory.getDataLoader('MapTiles');
 
 	var map = {
