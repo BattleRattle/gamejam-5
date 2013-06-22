@@ -12,7 +12,7 @@ defaultCityActorState = gamvas.ActorState.extend({
 		this.dim = gamvas.getCanvasDimension();
 
 		var minX = -this.config.size.width * 512 / 2;
-		var minY = -this.config.size.height * 512 / 2 -250;
+		var minY = -this.config.size.height * 512 / 2;
 		var x = minX;
 		for (var xCounter = 0; xCounter < this.config.size.width; xCounter++) {
 			var y = minY;
