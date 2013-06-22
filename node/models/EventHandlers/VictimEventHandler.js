@@ -27,7 +27,7 @@ VictimEventHandler.prototype.collide = function (player, data) {
 
 	this.victims = newVictims;*/
 
-	return this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {
+	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {
 		'id': data.id
 	});
 }

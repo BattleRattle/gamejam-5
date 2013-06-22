@@ -1,0 +1,9 @@
+{
+	"id": "pink",
+	"default": false,
+	"image": "pink",
+	"collisionBox": {
+		"width": 24,
+		"height": 24
+	}
+}

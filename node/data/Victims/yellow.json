@@ -1,0 +1,9 @@
+{
+	"id": "yellow",
+	"default": false,
+	"image": "yellow",
+	"collisionBox": {
+		"width": 24,
+		"height": 24
+	}
+}
