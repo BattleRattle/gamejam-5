@@ -5,19 +5,6 @@ victimActor = gamvas.Actor.extend({
 	// load the image. see below.
 	create: function(name, x, y, config) {
 		// IMPORTANT! initialize our actor by calling the super class constructor
-		this._super(name, x, y);
-		this.config = config;
-		this.collided = false;
-
-		console.log("VICTIM CREATED", config)
-
-		this.addAnimation(
-			new gamvas.Animation('running', Application.images['default_victim'], 24, 24, 6, 9)
-		);
-
-		this.setAnimation("running");
-		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
-
 		this.path = {
 			start: new gamvas.Vector2D(config.path.start.x, config.path.start.y),
 			direction: new gamvas.Vector2D(config.path.end.x - config.path.start.x, config.path.end.y - config.path.start.y)
@@ -26,7 +13,19 @@ victimActor = gamvas.Actor.extend({
 		this.currentPosition = this.path.start.add(multiplyVec2D(this.path.direction, Math.random()));
 
 		// normalized direction
-		this.direction = Math.random() < 0.5 ? this.path.direction.normalized() : multiplyVec2D(this.path.direction.normalized(), -1);
+		this.direction = Math.random() < 0.5 ? this.path.direction.normalized() : multiplyVec2D(this.path.direction, -1).normalized();
+
+
+		this._super(name, this.currentPosition.x, this.currentPosition.y);
+		this.config = config;
+		this.collided = false;
+
+		this.addAnimation(
+			new gamvas.Animation('running', Application.images['default_victim'], 24, 24, 6, 9)
+		);
+
+		this.setAnimation("running");
+		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
 
 		this.preDraw(0);
 	},
@@ -42,7 +41,14 @@ victimActor = gamvas.Actor.extend({
 //		}
 
 		this.setPosition(this.currentPosition.x, this.currentPosition.y);
-		this.setRotation(Math.acos(this.direction.x));
+//		if(this.direction.x )
+
+
+//		var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+//		var worldDirVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(this.direction.x, this.direction.y));
+//		this.setRotation(Math.acos(worldDirVec.x) - Math.acos(worldForwardVec.x) + 0.5 * Math.PI);
+
+		this.setRotation((this.direction.x === 0.0) ? Math.asin(this.direction.y) : Math.acos(this.direction.x));
 	},
 
 	onCollisionEnter: function(a) {

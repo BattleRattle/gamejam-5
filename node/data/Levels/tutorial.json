@@ -4,6 +4,9 @@
 	"mapId": "simple",
 	"carId": "green",
 	"victims": [
-		"default"
+		"blue",
+		"yellow",
+		"default",
+		"red"
 	]
 }
