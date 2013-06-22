@@ -1,8 +1,10 @@
 var ObstacleEventHandler = require('./EventHandlers/ObstacleEventHandler');
 var VictimEventHandler = require('./EventHandlers/VictimEventHandler');
+var LevelEventHandler = require('./EventHandlers/LevelEventHandler.js');
 
-var ConnectionEventFactory = function() {
+var ConnectionEventFactory = function(connectionHandler) {
 
+	this.connectionHandler = connectionHandler;
 	this.eventHandlers = {};
 
 }
@@ -17,13 +19,19 @@ ConnectionEventFactory.prototype.getEventHandler = function(remoteClass) {
 			this.eventHandlers[remoteClass] = new ObstacleEventHandler();
 			break;
 
-		case 'Victim':
+		case VictimEventHandler.CLASS_NAME:
 			this.eventHandlers[remoteClass] = new VictimEventHandler();
+			break;
+
+		case LevelEventHandler.CLASS_NAME:
+			this.eventHandlers[remoteClass] = new LevelEventHandler();
 			break;
 
 		default:
 			throw new Error('event handler is not implemented: ' + remoteClass);
 	}
+
+	this.eventHandlers[remoteClass].setConnectionHandler(this.connectionHandler);
 
 	return this.eventHandlers[remoteClass];
 }

@@ -1,7 +1,7 @@
 var Player = function (socket) {
 
 	this.socket = socket;
-	this.level = '';
+	this.level = 'simple';
 
 }
 
@@ -16,3 +16,5 @@ Player.prototype.setLevel = function (level) {
 Player.prototype.getLevel = function () {
 	return this.level;
 }
+
+module.exports = Player;
