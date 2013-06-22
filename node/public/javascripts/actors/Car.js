@@ -31,7 +31,7 @@ carActor = gamvas.Actor.extend({
 
         this.MAX_HEALTH = 1000;
 
-        this.health = 1000;
+        this.health = 100;
 
 		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
@@ -53,6 +53,7 @@ carActor = gamvas.Actor.extend({
 		this.lastUpdateTime = 0;
        this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
        this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);
+        this.darkSmoke = new darkSmokeEmitter("carDamageDarkSmoke", this.position.x, this.position.y);
 
 	},
 
@@ -94,11 +95,14 @@ carActor = gamvas.Actor.extend({
     drawDamage:function(t){
         if(this.health < 0.0){
 
+            Application.scenes['level'].addActor(new explosionEmitter("boom", this.position.x, this.position.y));
+            Application.scenes['level'].removeActor(this);
+
             return;
         }
 
 
-        if(this.health < this.MAX_HEALTH * 0.166){
+        if(this.health < this.MAX_HEALTH * 0.2){
             this.sparks.setPosition(this.position.x, this.position.y);
 
             var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
@@ -108,13 +112,13 @@ carActor = gamvas.Actor.extend({
         }
 
 
-        if(this.health < this.MAX_HEALTH * 0.333){
-
-            return;
-        }
-
         if(this.health < this.MAX_HEALTH * 0.5){
 
+            this.darkSmoke.setPosition(this.position.x, this.position.y);
+
+            var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+            this.darkSmoke.setRotation(Math.acos(worldForwardVec.x) * Math.PI * 1.5);
+            this.darkSmoke.draw(t);
             return;
         }
 
