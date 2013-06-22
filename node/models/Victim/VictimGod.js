@@ -13,8 +13,13 @@ var VictimGod = function(levelData, dataLoaderFactory) {
 };
 
 VictimGod.prototype.buildVictim = function () {
+	var tileset = {
+		x: 	getRandomInt(1, this.levelData.map.size.width - 2),
+		y: getRandomInt(1, this.levelData.map.size.height - 2)
+	};
+
 	var victimData = this.selectVictim();
-	var path = this.selectPath(5, 5);
+	var path = this.selectPath(tileset.x, tileset.y);
 
 	if (path) {
 		var counter = ++this.victimCounter;
@@ -22,10 +27,7 @@ VictimGod.prototype.buildVictim = function () {
 			'id': this.levelId + "" + counter,
 			'levelId': this.levelId,
 			'data': victimData,
-			'tileset': {
-				x: 5,
-				y: 5
-			},
+			'tileset': tileset,
 			'path': path
 		};
 

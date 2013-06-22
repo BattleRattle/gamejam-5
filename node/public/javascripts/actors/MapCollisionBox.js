@@ -7,7 +7,6 @@ mapCollisionBoxActor = gamvas.Actor.extend({
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 		this.config = config;
-		this.collided = false;
 
 		if (config.type == "rect") {
 			this.bodyRect(this.position.x + config.width / 2, this.position.y + config.height / 2, config.width, config.height, gamvas.physics.STATIC);
@@ -19,9 +18,6 @@ mapCollisionBoxActor = gamvas.Actor.extend({
 	},
 
 	onCollisionEnter: function(a) {
-		if (!this.collided) {
-			this.collided = true;
-			console.log("i got hit by "+a.name);
-		}
+		console.log(this.name + " got hit by "+a.name);
 	}
 });
