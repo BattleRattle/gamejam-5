@@ -35,5 +35,4 @@ gamvas.event.addOnLoad(function() {
 	}
 
 	var st = gamvas.state.getCurrentState();
-	Application.images['default_victim'] = st.resource.getImage('images/victims/default.png');
 });
