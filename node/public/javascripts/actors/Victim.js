@@ -9,10 +9,40 @@ victimActor = gamvas.Actor.extend({
 		this.config = config;
 		this.collided = false;
 
-		//this.bodyRect(this.position.x, this.position.y, 25);
+		console.log("VICTIM CREATED", config)
 
-		this.setFile(Application.images['default_victim']);
-		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.STATIC);
+		this.addAnimation(
+			new gamvas.Animation('running', Application.images['default_victim'], 24, 24, 6, 9)
+		);
+
+		this.setAnimation("running");
+		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
+
+		this.path = {
+			start: new gamvas.Vector2D(config.path.start.x, config.path.start.y),
+			direction: new gamvas.Vector2D(config.path.end.x - config.path.start.x, config.path.end.y - config.path.start.y)
+		};
+
+		this.currentPosition = this.path.start.add(multiplyVec2D(this.path.direction, Math.random()));
+
+		// normalized direction
+		this.direction = Math.random() < 0.5 ? this.path.direction.normalized() : multiplyVec2D(this.path.direction.normalized(), -1);
+
+		this.preDraw(0);
+	},
+
+	preDraw: function(t) {
+		var SPEED = 40;
+
+		this.currentPosition = this.currentPosition.add(multiplyVec2D(this.direction, SPEED * t));
+//		if (this.currentPosition.subtract(this.path.start).length() > this.direction.length()) {
+//			var subtract = this.currentPosition.subtract(this.path.start).length() - this.direction.length();
+//			this.currentPosition = multiplyVec2D(this.currentPosition, subtract);
+//			this.direction = multiplyVec2D(this.direction, -1);
+//		}
+
+		this.setPosition(this.currentPosition.x, this.currentPosition.y);
+		this.setRotation(Math.acos(this.direction.x));
 	},
 
 	onCollisionEnter: function(a) {

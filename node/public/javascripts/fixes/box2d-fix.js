@@ -12,9 +12,9 @@ Box2D.Dynamics.b2Body.prototype.ApplyAngularImpulse = function(impulse) {
 };
 
 multiplyVec2D = function(vec, num) {
-	var temp = vec.Copy();
-	temp.x *= num;
-	temp.y *= num;
+	var temp = (typeof vec.Copy == "function" ? vec.Copy() : new gamvas.Vector2D());
+	temp.x = vec.x * num;
+	temp.y = vec.y * num;
 
 	return temp;
 };

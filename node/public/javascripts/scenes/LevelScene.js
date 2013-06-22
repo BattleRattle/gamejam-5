@@ -31,7 +31,6 @@ levelScene = gamvas.State.extend({
 		var MAX_ZOOM = 1.3;
 		var MAX_VECTOR_LENGTH = 18;
 
-
 		var velocity = this.carActor.getForwardVelocity();
 		if (velocity > MAX_VECTOR_LENGTH / 2 && this.camera.zoomFactor > MIN_ZOOM) {
 			this.camera.zoom(-0.2 * t);
