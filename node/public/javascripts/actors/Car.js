@@ -48,6 +48,13 @@ carActor = gamvas.Actor.extend({
 		// and switch to it (actors have a default state which does nothing)
 		this.setState('default');
 
+		this.handler = handlerFactory.getHandler('Player');
+		this.lastPosition = {
+			'x': 0,
+			'y': 0
+		};
+		this.updateEveryMilliSeconds = 1000 / 10;
+		this.lastUpdateTime = 0;
 	},
 
 	calculatePhysics: function(t) {
@@ -75,6 +82,8 @@ carActor = gamvas.Actor.extend({
 		this.wheels.forEach(function(wheel) {
 			wheel.calculatePhysics(t);
 		});
+
+		this.updateServer(t);
 	},
 
 	getForwardVelocity: function() {
@@ -84,5 +93,35 @@ carActor = gamvas.Actor.extend({
 
 		var currentForwardNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
 		return multiplyVec2D(currentForwardNormal, Box2D.Common.Math.b2Math.Dot(currentForwardNormal, this.body.GetLinearVelocity())).Length();
+	},
+
+	updateServer: function(t) {
+		// prevent client from spamming server
+		this.lastUpdateTime += t * 1000;
+		if (this.lastUpdateTime < this.updateEveryMilliSeconds) {
+			return;
+		}
+		this.lastUpdateTime = 0;
+
+		var changed = false;
+		var xPosition = Math.round(this.position.x * 100) / 100;
+		var yPosition = Math.round(this.position.y * 100) / 100;
+
+		if (this.lastPosition.x !== xPosition) {
+			this.lastPosition.x = xPosition;
+			changed = true;
+		}
+		if (this.lastPosition.y !== yPosition) {
+			this.lastPosition.y = yPosition;
+			changed = true;
+		}
+
+		if (changed) {
+			this.handler.callUpdatePosition({
+				'x': xPosition,
+				'y': yPosition
+			});
+		}
 	}
+
 });

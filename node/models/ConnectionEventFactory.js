@@ -1,7 +1,8 @@
 var ObstacleEventHandler = require('./EventHandlers/ObstacleEventHandler'),
 	HighScoreEventHandler = require('./EventHandlers/HighScoreEventHandler'),
 	VictimEventHandler = require('./EventHandlers/VictimEventHandler'),
-	LevelEventHandler = require('./EventHandlers/LevelEventHandler.js');
+	LevelEventHandler = require('./EventHandlers/LevelEventHandler.js'),
+	PlayerEventHandler = require('./EventHandlers/PlayerEventHandler.js');
 
 var ConnectionEventFactory = function(connectionHandler) {
 
@@ -30,6 +31,10 @@ ConnectionEventFactory.prototype.getEventHandler = function(remoteClass) {
 
 		case LevelEventHandler.CLASS_NAME:
 			this.eventHandlers[remoteClass] = new LevelEventHandler();
+			break;
+
+		case PlayerEventHandler.CLASS_NAME:
+			this.eventHandlers[remoteClass] = new PlayerEventHandler();
 			break;
 
 		default:
