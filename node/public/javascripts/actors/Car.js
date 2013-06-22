@@ -82,5 +82,6 @@ carActor = gamvas.Actor.extend({
 		 var relativeVelo = this.actor.body.GetLocalVector(
 		 this.actor.body.GetLinearVelocityFromLocalPoint(
 		 new Box2D.Common.Math.b2Vec2(this.actor.position.x, this.actor.position.y)));*/
-	}
+	},
+
 });
