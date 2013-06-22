@@ -7,7 +7,7 @@ levelScene = gamvas.State.extend({
         gamvas.physics.resetWorld(0, 0, false);
 
 		this.addActor(new cityActor("city", 0, 0, Application.levelData));
-		this.addActor(new carActor("car", 0, 0, Application.levelData.car));
+		this.addActor(this.carActor = new carActor("car", 0, 0, Application.levelData.car));
 
 		if (gamvas.config.debug) {
 			this.addActor(new debugActor("debug"));
@@ -23,6 +23,11 @@ levelScene = gamvas.State.extend({
 	removeVictim: function (data) {
 		this.removeActor(this.victims[data.id]);
 
+	},
+
+	preDraw: function(t) {
+		// follow the car
+		this.camera.setPosition(this.carActor.position.x, this.carActor.position.y);
 	},
 
 	postDraw: function(t) {
