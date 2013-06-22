@@ -7,9 +7,8 @@ var HighScoreEventHandler = function () {
 HighScoreEventHandler.prototype = AbstractEventHandler.prototype;
 HighScoreEventHandler.CLASS_NAME = 'HighScore';
 
-HighScoreEventHandler.prototype.getHighScore = function () {
-
-	return this.createDirectResponse(HighScoreEventHandler.CLASS_NAME, 'getHighScore', [
+HighScoreEventHandler.prototype.getHighScore = function (player) {
+	this.createDirectResponse(player, HighScoreEventHandler.CLASS_NAME, 'getHighScore', [
 		{
 			"name": "Cpatain Awesome",
 			"points": 100000

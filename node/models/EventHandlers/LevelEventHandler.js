@@ -16,7 +16,7 @@ LevelEventHandler.CLASS_NAME = 'Level';
 LevelEventHandler.prototype.enter = function (player, data) {
 	var levelData = this.levelGenerator.getLevel(data.levelId);
 
-	return this.createBroadcastResponse(player, LevelEventHandler.CLASS_NAME, 'getData', levelData);
+	this.createBroadcastResponse(player, LevelEventHandler.CLASS_NAME, 'getData', levelData);
 }
 
 module.exports = LevelEventHandler;

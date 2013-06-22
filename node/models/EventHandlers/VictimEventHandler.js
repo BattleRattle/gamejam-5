@@ -18,7 +18,7 @@ VictimEventHandler.prototype.push = function (player) {
 	};
 	this.victims.push(victim);
 
-	return this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'push', victim);
+	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'push', victim);
 }
 
 VictimEventHandler.prototype.collide = function (player, data) {
@@ -34,7 +34,7 @@ VictimEventHandler.prototype.collide = function (player, data) {
 
 	this.victims = newVictims;
 
-	return this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {
+	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {
 		'id': data.id
 	});
 }
