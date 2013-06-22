@@ -3,7 +3,8 @@ tileActor = gamvas.Actor.extend({
 	// we add a extra parameter name file, which a normal gamvas.Actor does not have.
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
-	create: function(name, x, y, file) {
+	create: function(name, x, y, config) {
+		console.log("render :", name, " x:",x," y:",y, " tile:", config)
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 
@@ -12,7 +13,7 @@ tileActor = gamvas.Actor.extend({
 
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
-		this.setFile(st.resource.getImage('images/map/tilesets/tile-default.jpg'));
+		this.setFile(st.resource.getImage('images/map/tilesets/' + config.image));
 
 
 	}

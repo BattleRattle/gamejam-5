@@ -1,6 +1,6 @@
 {
 	"id": "top-left",
-	"image": "tile-top-left.png",
+	"image": "tile-top-left.jpg",
 	"position": "NW",
 	"collisions": [
 		{

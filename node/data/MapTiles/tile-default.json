@@ -1,6 +1,6 @@
 {
 	"id": "default",
-	"image": "tile-default.png",
+	"image": "tile-default.jpg",
 	"position": "*",
 	"collisions": [
 		{
