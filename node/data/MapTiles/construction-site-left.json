@@ -1,0 +1,42 @@
+{
+	"id": "cs-left",
+	"image": "construction-site-left.jpg",
+	"position": "*",
+	"collisions": [
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 0,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 0,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 4,
+			"y": 176,
+			"width": 172,
+			"height": 88
+		}
+	]
+}

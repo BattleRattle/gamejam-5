@@ -10,7 +10,11 @@
 		"grass-right",
 		"grass-top",
 		"top-left",
-		"top-right"
+		"top-right",
+		"cs-left",
+		"cs-right",
+		"cs-bottom",
+		"cs-top"
 	],
 	"size": {
 		"height": 10,
