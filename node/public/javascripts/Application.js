@@ -11,6 +11,7 @@ gamvas.event.addOnLoad(function() {
 
 	// add states here
 	gamvas.state.addState(new startScene('start'));
+	gamvas.state.addState(new highScoreScene('high_score'));
 	gamvas.state.addState(new levelScene('level'));
 
 
