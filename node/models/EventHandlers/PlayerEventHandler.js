@@ -14,7 +14,8 @@ PlayerEventHandler.prototype.updatePosition = function (player, data) {
 	this.createBroadcastResponse(player, PlayerEventHandler.CLASS_NAME, 'newPlayerPosition', {
 		'playerId': player.playerId,
 		'x': data.x,
-		'y': data.y
+		'y': data.y,
+		'angle': data.angle
 	});
 }
 
