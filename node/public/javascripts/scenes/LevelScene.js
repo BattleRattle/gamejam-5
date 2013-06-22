@@ -1,12 +1,12 @@
 levelScene = gamvas.State.extend({
 	init: function() {
-		console.log("level");
+		console.log(Application.levelData);
 		this.dim = gamvas.getCanvasDimension();
 
         gamvas.physics.resetWorld(0, 0, false);
 
-		this.addActor(new cityActor("city", 0, 0));
-		this.addActor(new carActor("car", 0, 0));
+		this.addActor(new cityActor("city", 0, 0, Application.levelData));
+		this.addActor(new carActor("car", 0, 0, Application.levelData.car));
 
 		if (gamvas.config.debug) {
 			this.addActor(new debugActor("debug"));

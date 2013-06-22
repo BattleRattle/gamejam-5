@@ -1,7 +1,8 @@
 var Application = {
 	scenes: {
 
-	}
+	},
+	levelData: {}
 }
 
 gamvas.event.addOnLoad(function() {

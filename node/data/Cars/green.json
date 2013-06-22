@@ -2,8 +2,8 @@
 	"id": "green",
 	"image": "green.png",
 	"collisionBox": {
-		"width": 48,
-		"height": 24
+		"width": 96,
+		"height": 48
 	},
 	"default": true
 }

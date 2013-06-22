@@ -17,6 +17,7 @@ LevelGenerator.prototype.getLevel = function (levelId) {
 LevelGenerator.prototype.generateLevel = function (levelId) {
 	var levelData = this.dataLoaderFactory.getDataLoader("Level").getData(levelId);
 	var level = {
+		levelId: levelId,
 		map: this.mapGenerator.getMap(levelData.mapId),
 		car: this.dataLoaderFactory.getDataLoader("Car").getData(levelData.carId)
 	}
