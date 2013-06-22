@@ -10,11 +10,9 @@ victimActor = gamvas.Actor.extend({
 			direction: new gamvas.Vector2D(config.path.end.x - config.path.start.x, config.path.end.y - config.path.start.y)
 		};
 
-		this.currentPosition = this.path.start.add(multiplyVec2D(this.path.direction, Math.random()));
-
-		// normalized direction
-		this.direction = Math.random() < 0.5 ? this.path.direction.normalized() : multiplyVec2D(this.path.direction, -1).normalized();
-
+		this.currentPosition = this.path.start;
+		this.direction = this.path.direction.normalized();
+		this.goBack = false;
 
 		this._super(name, this.currentPosition.x, this.currentPosition.y);
 		this.config = config;
@@ -41,11 +39,15 @@ victimActor = gamvas.Actor.extend({
 		var SPEED = 40;
 
 		this.currentPosition = this.currentPosition.add(multiplyVec2D(this.direction, SPEED * t));
-//		if (this.currentPosition.subtract(this.path.start).length() > this.direction.length()) {
-//			var subtract = this.currentPosition.subtract(this.path.start).length() - this.direction.length();
-//			this.currentPosition = multiplyVec2D(this.currentPosition, subtract);
-//			this.direction = multiplyVec2D(this.direction, -1);
-//		}
+		var runLength = this.currentPosition.subtract(this.path.start).length();
+		if (runLength > this.path.direction.length()) {
+			this.currentPosition = this.path.start.add(this.path.direction);
+			this.direction = multiplyVec2D(this.direction, -1);
+			this.goBack = true;
+		} else if (runLength < 2 && this.goBack) {
+			this.direction = multiplyVec2D(this.direction, -1);
+			this.goBack = false;
+		}
 
 		this.setPosition(this.currentPosition.x, this.currentPosition.y);
 		this.setRotation((this.direction.x === 0.0) ? Math.asin(this.direction.y) : Math.acos(this.direction.x));
