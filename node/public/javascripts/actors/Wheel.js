@@ -25,7 +25,6 @@ wheelActor = gamvas.Actor.extend({
 
 		// and switch to it (actors have a default state which does nothing)
 		this.setState('default');
-
 	},
 
 	calculatePhysics: function(t) {
@@ -35,17 +34,17 @@ wheelActor = gamvas.Actor.extend({
 	},
 
 	getForwardVelocity: function() {
-		var currentForwardNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
+		var currentForwardNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(0, 1));
 		return multiplyVec2D(currentForwardNormal, Box2D.Common.Math.b2Math.Dot(currentForwardNormal, this.body.GetLinearVelocity()));
 	},
 
 	getLateralVelocity: function() {
-		var currentRightNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(0, 1));
+		var currentRightNormal = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
 		return multiplyVec2D(currentRightNormal, Box2D.Common.Math.b2Math.Dot(currentRightNormal, this.body.GetLinearVelocity()));
 	},
 
 	updateFriction: function() {
-		var MAX_LATERAL_IMPULSE = 8.0;
+		var MAX_LATERAL_IMPULSE = this.getCharacteristics().maxLateralImpulse;
 
 		var impulse = multiplyVec2D(this.getLateralVelocity(), -this.body.GetMass());
 		if (impulse.Length() > MAX_LATERAL_IMPULSE) {
@@ -62,9 +61,10 @@ wheelActor = gamvas.Actor.extend({
 	},
 
 	updateDrive: function() {
-		var MAX_FORWARD_SPEED = 10;
-		var MAX_BACKWARD_SPEED = -2;
-		var MAX_DRIVE_FORCE = 1.5;
+		var char = this.getCharacteristics();
+		var MAX_FORWARD_SPEED = char.maxForwardSpeed;
+		var MAX_BACKWARD_SPEED = char.maxBackwardSpeed;
+		var MAX_DRIVE_FORCE = char.maxForwardSpeed;
 
 		var desiredSpeed = 0;
 		if (gamvas.key.isPressed(gamvas.key.UP)) {
@@ -94,11 +94,20 @@ wheelActor = gamvas.Actor.extend({
 		var desiredTorque = 0;
 
 		if (gamvas.key.isPressed(gamvas.key.LEFT)) {
-			desiredTorque = 15;
-		} else if (gamvas.key.isPressed(gamvas.key.RIGHT)) {
 			desiredTorque = -15;
+		} else if (gamvas.key.isPressed(gamvas.key.RIGHT)) {
+			desiredTorque = 15;
 		}
 
 		this.body.ApplyTorque(desiredTorque);
+	},
+
+	getCharacteristics: function() {
+		return {
+			maxForwardSpeed: 0,
+			maxBackwardSpeed: 0,
+			maxDriveForce: 0,
+			maxLateralImpulse: 0
+		}
 	}
 });

@@ -21,20 +21,26 @@ carActor = gamvas.Actor.extend({
         this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
 
         this.wheels = [
-            new wheelActor("front_left", 25, -29, this),
-            new wheelActor("front_right", 25, 29, this),
-            new wheelActor("rear_left", -26, -29, this),
-            new wheelActor("rear_right", -26, 29, this)
+            new frontWheelActor("front_left", 25, -23, this),
+            new frontWheelActor("front_right", 25, 23, this),
+            new rearWheelActor("rear_left", -26, -23, this),
+            new rearWheelActor("rear_right", -26, 23, this)
         ];
 
 		this.setAngularDamping(3);
 
+		var massData = new Box2D.Collision.Shapes.b2MassData();
+		massData.mass = 1500;
+		massData.I = 0;
+		massData.center.x = 0;
+		massData.center.y = 0;
+		this.body.SetMassData(massData);
 
-		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(25), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(25), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-26), gamvas.physics.toWorld(30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-26), gamvas.physics.toWorld(-30)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 
+		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(25), gamvas.physics.toWorld(-20)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(25), gamvas.physics.toWorld(20)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-26), gamvas.physics.toWorld(-20)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-26), gamvas.physics.toWorld(20)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
@@ -47,13 +53,13 @@ carActor = gamvas.Actor.extend({
 	calculatePhysics: function(t) {
 		var lockAngle = gamvas.math.degToRad(35);
 		var turnSpeedPerSec = gamvas.math.degToRad(160);
-		var turnPerTimeStep = turnSpeedPerSec / 60.0;
+		var turnPerTimeStep = turnSpeedPerSec * 1000 / t;
 
 		var desiredAngle = 0;
 		if (gamvas.key.isPressed(gamvas.key.LEFT)) {
-			desiredAngle = lockAngle;
-		} else if (gamvas.key.isPressed(gamvas.key.RIGHT)) {
 			desiredAngle = -lockAngle;
+		} else if (gamvas.key.isPressed(gamvas.key.RIGHT)) {
+			desiredAngle = lockAngle;
 		}
 
 		var angleNow = this.flJoint.GetJointAngle();
