@@ -19,7 +19,8 @@ LevelGenerator.prototype.generateLevel = function (levelId) {
 	var level = {
 		levelId: levelId,
 		map: this.mapGenerator.getMap(levelData.mapId),
-		car: this.dataLoaderFactory.getDataLoader("Car").getData(levelData.carId)
+		car: this.dataLoaderFactory.getDataLoader("Car").getData(levelData.carId),
+		victims: levelData.victims
 	}
 
 	// validate all the victims

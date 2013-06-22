@@ -29,14 +29,6 @@ carActor = gamvas.Actor.extend({
         this.setAngularDamping(10);
         this.setLinearDamping(6);
 
-/*		var massData = new Box2D.Collision.Shapes.b2MassData();
-		massData.mass = 50;
-		massData.I = 50;
-		massData.center.x = 0;
-		massData.center.y = 0;
-		this.body.SetMassData(massData);*/
-
-
 		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
 		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(-22)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
