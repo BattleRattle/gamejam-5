@@ -16,7 +16,9 @@ carActor = gamvas.Actor.extend({
 
         // a car is a moving object
 		this.position.y -= 250;
-        this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
+
+        this.bodyPolygon(this.position.x, this.position.y, [[0,6],[6,0], [82,0], [96,12], [96,36],[82,48],[6,48],[0,42]], 48, 24, gamvas.physics.DYNAMIC);
+
 
         this.wheels = [
             new frontWheelActor("front_left", 27, -23 -250, this),
