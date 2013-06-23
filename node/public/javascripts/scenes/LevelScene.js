@@ -10,6 +10,8 @@ levelScene = gamvas.State.extend({
 	init: function() {
 		gamvas.physics.resetWorld(0, 0, false);
 		this.hornSound = this.addSound("/sounds/horn-1.mp3");
+
+		this.bombAvailable = true;
 	},
 
 	addVictim: function(data) {
@@ -83,7 +85,15 @@ levelScene = gamvas.State.extend({
 				this.hornSound.play();
 				break;
 			case gamvas.key.B:
-				this.addActor(new bombActor("carbomb" + Application.bombCounter++, this.carActor.position.x, this.carActor.position.y, {size: 6, timeout: 1000 }));
+				if (this.bombAvailable) {
+					this.bombAvailable = false;
+					this.addActor(new bombActor("carbomb" + Application.bombCounter++, this.carActor.position.x, this.carActor.position.y, {size: 6, timeout: 1000 }));
+					var that = this;
+					setTimeout(function() {
+						that.bombAvailable = true;
+					}, 1000)
+				}
+
 				break;
 		}
 	},
