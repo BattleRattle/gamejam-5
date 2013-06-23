@@ -19,7 +19,7 @@ victimActor = gamvas.Actor.extend({
 
 		this._super(name, this.currentPosition.x, this.currentPosition.y);
 		this.config = config;
-		this.config.type = "victim";
+		this.config.collisionType = "victim";
 		this.collided = false;
 
 		var st = gamvas.state.getCurrentState();
@@ -62,13 +62,12 @@ victimActor = gamvas.Actor.extend({
 
 	onCollisionEnter: function(a) {
 		if (!this.collided) {
-			if (a.config && a.config.type == "victim") {
+			if (a.config && (a.config.collisionType == "victim" || a.config.collisionType == "collision")) {
 				return;
 			}
 
 			this.collided = true;
 			handlerFactory.getHandler("Victim").callCollide(this.config);
-			console.log("i got hit by ", a);
 		}
 	}
 });
