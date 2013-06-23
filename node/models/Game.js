@@ -34,6 +34,9 @@ Game.prototype.createPlayer = function(socket) {
 
 Game.prototype.removePlayer = function(socket) {
 	var player = this.getPlayerBySocket(socket);
+	var playerHandler = this.connectionEventFactory.getEventHandler(PlayerEventHandler.CLASS_NAME);
+	playerHandler.callPlayerLeft(player);
+
 	var level = player.getLevel();
 	this.levels[level].removePlayer(player);
 
