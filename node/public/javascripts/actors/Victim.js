@@ -4,9 +4,11 @@ victimActor = gamvas.Actor.extend({
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
 	create: function(name, x, y, config) {
-		// IMPORTANT! initialize our actor by calling the super class constructor
+		var offsetX = (config.tileset.x - 5) * 512;
+		var offsetY = (config.tileset.y - 5) * 512;
+
 		this.path = {
-			start: new gamvas.Vector2D(config.path.start.x, config.path.start.y),
+			start: new gamvas.Vector2D(config.path.start.x + offsetX, config.path.start.y + offsetY),
 			direction: new gamvas.Vector2D(config.path.end.x - config.path.start.x, config.path.end.y - config.path.start.y)
 		};
 
