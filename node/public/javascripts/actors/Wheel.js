@@ -114,4 +114,5 @@ wheelActor = gamvas.Actor.extend({
 			maxLateralImpulse: 0
 		}
 	}
+
 });

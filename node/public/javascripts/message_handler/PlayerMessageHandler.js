@@ -29,3 +29,11 @@ PlayerMessageHandler.prototype.newPlayer = function(data) {
 		Application.scenes['level'].addPlayer(data);
 	}
 };
+
+PlayerMessageHandler.prototype.playerLeft = function(data) {
+	console.log('player %s left', data.playerId);
+
+	if (Application.scenes['level']._isInitialized) {
+		Application.scenes['level'].removePlayer(data);
+	}
+};

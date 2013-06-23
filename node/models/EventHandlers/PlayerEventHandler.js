@@ -32,6 +32,12 @@ PlayerEventHandler.prototype.callNewPlayer = function(player) {
 	}, false);
 };
 
+PlayerEventHandler.prototype.callPlayerLeft = function(player) {
+	this.createBroadcastResponse(player, PlayerEventHandler.CLASS_NAME, 'playerLeft', {
+		'playerId': player.playerId
+	}, false);
+};
+
 PlayerEventHandler.prototype.letMeDie = function (player, data) {
 	console.log("player:", player.playerId, "died")
 };

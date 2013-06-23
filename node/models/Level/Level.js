@@ -42,8 +42,9 @@ Level.prototype.addPlayer = function (player) {
 Level.prototype.removePlayer = function (player) {
 	var newPlayer = [];
 
+	var test = this.players;
 	for (var index in this.players) {
-		if (this.players[index].id === player.id) {
+		if (this.players[index].playerId === player.playerId) {
 			continue;
 		}
 

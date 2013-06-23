@@ -64,7 +64,7 @@ carActor = gamvas.Actor.extend({
 
 		var lockAngle = gamvas.math.degToRad(35);
 		var turnSpeedPerSec = gamvas.math.degToRad(320);
-		var turnPerTimeStep = turnSpeedPerSec / 60;
+		var turnPerTimeStep = turnSpeedPerSec / 30;
 
 		var desiredAngle = 0;
 		if (gamvas.key.isPressed(gamvas.key.LEFT)) {
