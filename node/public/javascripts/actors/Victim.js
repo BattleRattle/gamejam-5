@@ -4,6 +4,7 @@ victimActor = gamvas.Actor.extend({
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
 	create: function(name, x, y, config) {
+		this.layer = 2;
 		var offsetX = (config.tileset.x - 5) * 512;
 		var offsetY = (config.tileset.y - 5) * 512;
 
