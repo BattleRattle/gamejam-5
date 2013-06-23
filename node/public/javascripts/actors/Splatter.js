@@ -4,7 +4,7 @@ splatterActor = gamvas.Actor.extend({
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
 	create: function(name, x, y, config) {
-		this.layer = 1;
+		console.log(config)
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x + config.offset.x, y + config.offset.y);
 

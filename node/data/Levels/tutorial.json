@@ -2,7 +2,7 @@
 	"id": "tutorial",
 	"default": true,
 	"mapId": "simple",
-	"carId": "red",
+	"carId": "green",
 	"victims": [
 		"blue",
 		"yellow",
