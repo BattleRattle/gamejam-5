@@ -1,0 +1,12 @@
+{
+	"id": "splatter2",
+	"image": "splatter-2.png",
+	"size": {
+		"width": 88,
+		"height": 96
+	},
+	"offset": {
+		"x": -30,
+		"y": -30
+	}
+}

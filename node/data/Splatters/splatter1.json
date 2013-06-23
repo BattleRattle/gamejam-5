@@ -1,0 +1,13 @@
+{
+	"id": "splatter1",
+	"image": "splatter-1.png",
+	"size": {
+		"width": 50,
+		"height": 60
+	},
+	"offset": {
+		"x": -20,
+		"y": -20
+	}
+
+}

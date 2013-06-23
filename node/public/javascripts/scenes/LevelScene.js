@@ -12,7 +12,9 @@ levelScene = gamvas.State.extend({
 	},
 
 	removeVictim: function (data) {
-		this.removeActor(this.victims[data.id]);
+		var victim = this.victims[data.id];
+		this.addActor(new splatterActor("blood" + data.id, victim.position.x, victim.position.y, data.splatter));
+		this.removeActor(victim);
 
 	},
 

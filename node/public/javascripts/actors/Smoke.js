@@ -3,6 +3,7 @@ smokeEmitter = gamvas.ParticleEmitter.extend({
     create: function(name, x, y, img, anim) {
         // call super constructor
         this._super(name, x, y, img, anim);
+		this.layer = 10;
 
         // load the image, set center to middle
         var st = gamvas.state.getCurrentState();

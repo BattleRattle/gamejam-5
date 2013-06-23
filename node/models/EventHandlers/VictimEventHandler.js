@@ -29,9 +29,7 @@ VictimEventHandler.prototype.collide = function (player, data) {
 		}
 	}
 
-	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', {
-		'id': data.id
-	});
+	this.createBroadcastResponse(player, VictimEventHandler.CLASS_NAME, 'died', victim);
 }
 
 module.exports = VictimEventHandler;

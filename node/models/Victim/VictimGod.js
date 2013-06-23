@@ -10,6 +10,7 @@ var VictimGod = function(levelData, dataLoaderFactory) {
 	this.levelData = levelData;
 
 	this.victimDataLoaderFactory = dataLoaderFactory.getDataLoader('Victim');
+	this.splatterDataLoaderFactory = dataLoaderFactory.getDataLoader('Splatter');
 };
 
 VictimGod.prototype.buildVictim = function () {
@@ -28,7 +29,8 @@ VictimGod.prototype.buildVictim = function () {
 			'levelId': this.levelId,
 			'data': victimData,
 			'tileset': tileset,
-			'path': path
+			'path': path,
+			'splatter': this.splatterDataLoaderFactory.getRandom()
 		};
 
 		this.victims.push(victim);

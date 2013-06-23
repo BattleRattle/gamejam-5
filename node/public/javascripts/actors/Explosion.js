@@ -3,6 +3,7 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 	create: function(name, x, y, img, anim) {
 		// call super constructor
 		this._super(name, x, y, img, anim);
+		this.layer = 10;
 
 		// load the fire image, centered
 		var st = gamvas.state.getCurrentState();
@@ -67,6 +68,10 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 	},
 
 	draw: function(t) {
+		if (gamvas.key.isPressed(gamvas.key.R)) {
+			gamvas.state.setState("start");
+		}
+
 		// update the smoke emitters position to our fire emitters
 		this.smoke.setPosition(this.position.x, this.position.y);
 		// draw smoke
@@ -81,5 +86,6 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		// ... and our smoke emitter
 		this.smoke.reset(kill);
 	}
+
 });
 
