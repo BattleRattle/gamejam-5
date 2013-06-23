@@ -11,6 +11,10 @@ PlayerEventHandler.prototype = AbstractEventHandler.prototype;
 PlayerEventHandler.CLASS_NAME = 'Player';
 
 PlayerEventHandler.prototype.updatePosition = function (player, data) {
+	player.position.x = data.x;
+	player.position.y = data.y;
+	player.position.angle = data.angle;
+
 	this.createBroadcastResponse(player, PlayerEventHandler.CLASS_NAME, 'newPlayerPosition', {
 		'playerId': player.playerId,
 		'x': data.x,

@@ -132,7 +132,6 @@ carActor = gamvas.Actor.extend({
 	},
 
 	draw: function(t) {
-
 		this.wheels.forEach(function(wheel) {
 			wheel.draw(t);
 		});

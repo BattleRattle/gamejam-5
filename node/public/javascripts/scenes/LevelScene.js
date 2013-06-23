@@ -25,7 +25,7 @@ levelScene = gamvas.State.extend({
 	},
 
 	addPlayer: function (data) {
-		var player = new otherCarActor("car" + data.playerId, data.x, data.y, Application.levelData.car);
+		var player = new otherCarActor("car" + data.playerId, 0, 0, Application.levelData.car);
 		this.players[data.playerId] = player;
 		this.addActor(player);
 	},
@@ -44,12 +44,12 @@ levelScene = gamvas.State.extend({
 
 			if (typeof this.players[playerPosition.playerId] === 'undefined') {
 				this.addPlayer(playerPosition);
-			} else {
-				this.players[playerPosition.playerId].body.SetPositionAndAngle({
-					'x': playerPosition.x,
-					'y': playerPosition.y
-				}, gamvas.math.degToRad(playerPosition.angle));
 			}
+
+			this.players[playerPosition.playerId].body.SetPositionAndAngle({
+				'x': playerPosition.x,
+				'y': playerPosition.y
+			}, gamvas.math.degToRad(playerPosition.angle));
 		}
 	},
 
