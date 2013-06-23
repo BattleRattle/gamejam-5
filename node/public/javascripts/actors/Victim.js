@@ -4,6 +4,7 @@ victimActor = gamvas.Actor.extend({
 	// this is a little trick, so we can use the state wide resource handler to
 	// load the image. see below.
 	create: function(name, x, y, config) {
+		this.layer = 2;
 		var offsetX = (config.tileset.x - 5) * 512;
 		var offsetY = (config.tileset.y - 5) * 512;
 
@@ -18,6 +19,7 @@ victimActor = gamvas.Actor.extend({
 
 		this._super(name, this.currentPosition.x, this.currentPosition.y);
 		this.config = config;
+		this.config.collisionType = "victim";
 		this.collided = false;
 
 		var st = gamvas.state.getCurrentState();
@@ -34,7 +36,6 @@ victimActor = gamvas.Actor.extend({
 		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
 
 		this.preDraw(0);
-		this.setGroupIndex(-5);
 	},
 
 	preDraw: function(t) {
@@ -55,11 +56,18 @@ victimActor = gamvas.Actor.extend({
 		this.setRotation((this.direction.x === 0.0) ? Math.asin(this.direction.y) : Math.acos(this.direction.x));
 	},
 
+	update: function (t) {
+		this.setGroupIndex(-5);
+	},
+
 	onCollisionEnter: function(a) {
-		if (!this.collided && a.groupIndex != -5) {
+		if (!this.collided) {
+			if (a.config && (a.config.collisionType == "victim" || a.config.collisionType == "collision")) {
+				return;
+			}
+
 			this.collided = true;
 			handlerFactory.getHandler("Victim").callCollide(this.config);
-			console.log("i got hit by "+a.name);
 		}
 	}
 });

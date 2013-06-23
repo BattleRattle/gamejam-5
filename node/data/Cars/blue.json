@@ -2,8 +2,9 @@
 	"id": "blue",
 	"image": "blue.png",
 	"collisionBox": {
-		"width": 96,
-		"height": 48
+		"polys": [[0,6],[6,0], [82,0], [96,12], [96,36],[82,48],[6,48],[0,42]],
+		"cx": 48,
+		"cy": 24
 	},
 	"default": false
 }
