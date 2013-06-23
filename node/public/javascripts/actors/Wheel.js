@@ -24,7 +24,7 @@ wheelActor = gamvas.Actor.extend({
 		this.bodyRect(this.position.x, this.position.y, 16, 4, gamvas.physics.DYNAMIC);
 
 		// finally add the state to our actor
-		this.addState(new defaultCarActorState('default'));
+		this.addState(new gamvas.ActorState('default'));
 
 		// and switch to it (actors have a default state which does nothing)
 		this.setState('default');

@@ -134,8 +134,12 @@ carActor = gamvas.Actor.extend({
 
 	draw:function(t){
 
-		this._super(t);
-		this.drawDamage(t);
+        this.wheels.forEach(function(wheel) {
+            wheel.draw(t);
+        });
+        this._super(t);
+		this.drawDamage(t)
+
 	},
 
 	getForwardVelocity: function() {
