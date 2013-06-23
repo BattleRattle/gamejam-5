@@ -1,0 +1,23 @@
+{
+	"id": "theBigOne",
+	"participants": {
+		"amount": 30,
+		"type": "pink"
+	},
+	"startTileSet": {
+		"x": 0,
+		"y": 0
+	},
+	"path": [
+		{
+			"start": {
+				"x": 275,
+				"y": 275
+			},
+			"end": {
+				"x": 5076,
+				"y": 275
+			}
+		}
+	]
+}

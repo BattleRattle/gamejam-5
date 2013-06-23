@@ -18,12 +18,12 @@ var Level = function (levelId, connectionEventFactory) {
 	this.victimEventHandler.registerVictimGod(levelId, this.victimGod);
 
 	for (var i = 0; i < this.levelData.startVictims; i++) {
-		this.spawnVictim();
+		this.spawnVictim(true);
 	}
 	var that = this;
 	setInterval(function() {
 		if (that.victimGod.victims.length < that.levelData.maxVictims) {
-			that.spawnVictim();
+			that.spawnVictim(false);
 		}
 	}, 1000);
 };
@@ -54,8 +54,8 @@ Level.prototype.removePlayer = function (player) {
 	this.players = newPlayer;
 };
 
-Level.prototype.spawnVictim = function () {
-	var victim = this.victimGod.buildVictim();
+Level.prototype.spawnVictim = function (init) {
+	var victim = this.victimGod.buildVictim(init);
 
 	if (this.players.length > 0 && victim) {
 		this.victimEventHandler.push(this.players[0], victim);

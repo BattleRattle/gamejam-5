@@ -10,5 +10,8 @@
 		"pink"
 	],
 	"maxVictims": 275,
-	"startVictims": 50
+	"startVictims": 50,
+	"marathonsen": [
+		"theBigOne"
+	]
 }

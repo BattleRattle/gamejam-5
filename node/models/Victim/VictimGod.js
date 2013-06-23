@@ -6,14 +6,35 @@ var VictimGod = function(levelData, dataLoaderFactory) {
 	this.victims = [];
 	this.victimCounter = 0;
 
+	this.isMarathonRunning = false;
+	this.currentMarathon = null;
+	this.marathonParticipantsLeft = 0;
+
 	this.levelId = levelData.id;
 	this.levelData = levelData;
 
 	this.victimDataLoaderFactory = dataLoaderFactory.getDataLoader('Victim');
 	this.splatterDataLoaderFactory = dataLoaderFactory.getDataLoader('Splatter');
+	this.marathonsenDataLoaderFactory = dataLoaderFactory.getDataLoader('Marathonsen');
 };
 
-VictimGod.prototype.buildVictim = function () {
+VictimGod.prototype.buildVictim = function (init) {
+	if (!this.isMarathonRunning && this.marathonParticipantsLeft == 0 && !init) {
+		var rand = getRandomInt(0, 1000);
+		var chance = 1000;
+		for (var i = 0; i < this.levelData.marathonsen.length; i++) {
+			chance -= 9;
+
+			console.log(chance,rand)
+			if (chance < rand) {
+				return this.startMarathon(this.levelData.marathonsen[i]);
+			}
+		}
+	} else if (this.isMarathonRunning && this.marathonParticipantsLeft > 0 && !init) {
+		return this.spawnMarathon();
+	}
+
+
 	var tileset = {
 		x: 	getRandomInt(1, this.levelData.map.size.width - 2),
 		y: getRandomInt(1, this.levelData.map.size.height - 2)
@@ -39,6 +60,43 @@ VictimGod.prototype.buildVictim = function () {
 	}
 
 };
+
+VictimGod.prototype.startMarathon = function (marathon) {
+	this.isMarathonRunning = true;
+	this.currentMarathon = this.marathonsenDataLoaderFactory.getData(marathon);
+	this.marathonParticipantsLeft = this.currentMarathon.participants.amount;
+
+	return this.spawnMarathon();
+};
+
+VictimGod.prototype.spawnMarathon = function() {
+	this.marathonParticipantsLeft--;
+
+	var tileset = this.currentMarathon.startTileSet;
+	var victimData = this.victimDataLoaderFactory.getData(this.currentMarathon.participants.type);
+	var path = this.currentMarathon.path[0];
+
+	if (this.marathonParticipantsLeft == 0) {
+		this.isMarathonRunning = false;
+		this.currentMarathon = null;
+	}
+
+	if (path) {
+		var counter = ++this.victimCounter;
+		var victim = {
+			'id': this.levelId + "" + counter,
+			'levelId': this.levelId,
+			'data': victimData,
+			'tileset': tileset,
+			'path': path,
+			'splatter': this.splatterDataLoaderFactory.getRandom()
+		};
+
+		this.victims.push(victim);
+
+		return victim;
+	}
+}
 
 VictimGod.prototype.selectVictim = function () {
 	if (this.levelData.victims.length == 1) {

@@ -3,6 +3,7 @@ var MapTileDataLoader = require('./Map/MapTileDataLoader'),
 	LevelDataLoader = require('./Level/LevelDataLoader'),
 	VictimDataLoader = require('./Victim/VictimDataLoader'),
 	SplatterDataLoader = require('./Splatter/SplatterDataLoader'),
+	MarathonsenDataLoader = require('./Marathonsen/MarathonsenDataLoader'),
 	CarDataLoader = require('./Car/CarDataLoader');
 
 var DataLoaderFactory = function() {
@@ -39,6 +40,10 @@ DataLoaderFactory.prototype.getDataLoader = function(dataLoader) {
 
 		case 'Splatter':
 			this.dataLoader[dataLoader] = new SplatterDataLoader();
+			break;
+
+		case 'Marathonsen':
+			this.dataLoader[dataLoader] = new MarathonsenDataLoader();
 			break;
 
 		default:
