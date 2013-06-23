@@ -14,9 +14,9 @@ levelScene = gamvas.State.extend({
 		this.splatterSounds = this.addSound("/sounds/splatter-1.mp3");
 		this.carBombSound = this.addSound(("/sounds/explosion-1.wav"));
 		this.screamSounds = [
-			this.addSound(("/sounds/scream-1.mp3")),
-			this.addSound(("/sounds/scream-2.wav")),
-			this.addSound(("/sounds/scream-3.wav"))
+			this.addSound("/sounds/scream-1.mp3"),
+			this.addSound("/sounds/scream-2.wav"),
+			this.addSound("/sounds/scream-3.wav")
 		];
 		this.splatterSoundsPlaying = false;
 		this.carBombSoundPlaying = false;

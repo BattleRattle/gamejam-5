@@ -13,6 +13,8 @@ carActor = gamvas.Actor.extend({
 		// every state has predefined variables, one of them is .resource, which is the resource handler
 		this.setFile(st.resource.getImage('images/cars/' + config.image));
 		this.explosionSound = new gamvas.Sound(st.resource.getSound("/sounds/explosion-2.wav"));
+		this.crashSound = new gamvas.Sound(st.resource.getSound("/sounds/crash-1.wav"));
+		this.crashSoundPlaying = false;
 
 		// a car is a moving object
 		this.position.y -= 250;
@@ -94,6 +96,16 @@ carActor = gamvas.Actor.extend({
             this.health -= 15;
             return;
         }
+
+		if ((a.name.substr(0, 9) === "collision" || a.name.substr(0, 3) === "car") && !this.crashSoundPlaying) {
+			this.crashSoundPlaying = true;
+			this.crashSound.play();
+			var that = this;
+			setTimeout(function() {
+				that.crashSoundPlaying = false;
+			}, 300);
+		}
+
 		if (ni > 20) {
 			this.health -= ni * 0.1;
 		}
