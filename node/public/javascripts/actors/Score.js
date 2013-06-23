@@ -16,6 +16,7 @@ scoreActor = gamvas.Actor.extend({
 	},
 
 	draw: function (t) {
+		this.layer = 100;
 		this.c.fillStyle = '#ff69b4';
 		// pick some nice font
 		this.c.font = '16px sans-serif';

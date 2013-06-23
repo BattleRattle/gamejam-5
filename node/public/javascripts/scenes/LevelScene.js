@@ -22,9 +22,13 @@ levelScene = gamvas.State.extend({
 	},
 
 	removeVictim: function (data) {
-		var victim = this.victims[data.id];
-		this.addActor(new splatterActor("blood" + data.id, victim.position.x, victim.position.y, data.splatter));
-		this.removeActor(victim);
+		var that = this;
+		setTimeout(function() {
+			var victim = that.victims[data.id];
+			that.addActor(new splatterActor("blood" + data.id, victim.position.x, victim.position.y, data.splatter));
+			that.removeActor(victim);
+		}, 125);
+
 	},
 
 	addPlayer: function (data) {
@@ -92,7 +96,7 @@ levelScene = gamvas.State.extend({
 					var that = this;
 					setTimeout(function() {
 						that.bombAvailable = true;
-					}, 1000)
+					}, 750)
 				}
 
 				break;
