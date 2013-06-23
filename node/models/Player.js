@@ -9,6 +9,7 @@ var Player = function (socket) {
 		'y': 0,
 		'angle': 0
 	};
+	this.isDead = false;
 
 	this.setLevel('tutorial');
 }
