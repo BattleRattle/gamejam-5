@@ -53,10 +53,9 @@ carActor = gamvas.Actor.extend({
 		};
 		this.updateEveryMilliSeconds = 1000 / 10;
 		this.lastUpdateTime = 0;
-       this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
-       this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);
+       	this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
+       	this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);
         this.darkSmoke = new darkSmokeEmitter("carDamageDarkSmoke", this.position.x, this.position.y);
-
 	},
 
 	calculatePhysics: function(t) {

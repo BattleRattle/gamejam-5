@@ -1,6 +1,7 @@
 levelScene = gamvas.State.extend({
 	init: function() {
 		gamvas.physics.resetWorld(0, 0, false);
+		this.hornSound = this.addSound("/sounds/horn-1.mp3");
 	},
 
 	addVictim: function (data) {
@@ -40,9 +41,12 @@ levelScene = gamvas.State.extend({
 	onMouseDown: function(b, x, y) {
 	},
 
-	// prevent browser scrolling on space
-	onKeyDown: function(k) {
-		return false;
+	onKeyDown: function(keyCode, character, ev) {
+		switch (keyCode) {
+			case gamvas.key.H:
+				this.hornSound.play();
+				break;
+		}
 	},
 
 	// switch to rain state on space
