@@ -19,7 +19,8 @@
 		"parking-left",
 		"parking-right",
 		"tile-telephone",
-		"tile-barricades"
+		"tile-barricades",
+		"tile-streetart"
 	],
 	"size": {
 		"height": 10,
