@@ -195,6 +195,12 @@ carActor = gamvas.Actor.extend({
 		}
 	},
 
+    removeWheelsFromPhysicsWorld:function(){
+        this.wheels.forEach(function(wheel) {
+            gamvas.physics.getWorld().DestroyBody(wheel.body);
+        });
+    },
+
 	removeActor: function(elem, x, y) {
 		Application.scenes['level'].addActor(new explosionEmitter("boom", x, y, 10));
 		setTimeout(function () {
@@ -205,6 +211,9 @@ carActor = gamvas.Actor.extend({
 				Application.scenes['level'].removeActor(boom);
 			}, 100);
 		}, 100);
+
+        if(elem.name === 'car' && elem.usePhysics)
+            elem.removeWheelsFromPhysicsWorld();
 
 
 		Application.scenes['level'].removeActor(elem);
