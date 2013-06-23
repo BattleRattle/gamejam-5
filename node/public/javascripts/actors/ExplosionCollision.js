@@ -7,6 +7,6 @@ explosionCollisionActor = gamvas.Actor.extend({
 		// IMPORTANT! initialize our actor by calling the super class constructor
 		this._super(name, x, y);
 
-		this.bodyCircle(x, y, 12 * size, gamvas.physics.DYNAMIC);
+		this.bodyCircle(x, y, 14 * size, gamvas.physics.DYNAMIC);
 	}
 });

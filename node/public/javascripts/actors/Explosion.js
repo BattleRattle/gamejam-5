@@ -7,7 +7,13 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 
 		// load the fire image, centered
 		var st = gamvas.state.getCurrentState();
-		var fireimg = new gamvas.Image(st.resource.getImage('images/explosions/fire.png'));
+
+		var imagePath = 'images/explosions/fire.png'
+		if (typeof Application.images[imagePath] == "undefined") {
+			Application.images[imagePath] = new gamvas.Image(st.resource.getImage(imagePath));
+		}
+		var fireimg = Application.images[imagePath];
+
 		fireimg.setCenter(32, 32);
 		this.setImage(fireimg);
 
@@ -42,7 +48,11 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		// the smoke particles
 		// most settings are the same, i will only describe the differences
 		this.smoke = new gamvas.ParticleEmitter(this.name+'_smoke', this.position.x, this.position.y);
-		var smokeimg = new gamvas.Image(st.resource.getImage('images/explosions/smoke.png'));
+		var sImagePath = 'images/explosions/smoke.png';
+		if (typeof Application.images[sImagePath] == "undefined") {
+			Application.images[sImagePath] = new gamvas.Image(st.resource.getImage(sImagePath));
+		}
+		var smokeimg = Application.images[imagePath];
 		smokeimg.setCenter(32, 32);
 		this.smoke.setImage(smokeimg);
 		this.smoke.setRotationRange(2*Math.PI);
