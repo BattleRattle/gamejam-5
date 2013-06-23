@@ -1,20 +1,6 @@
 levelScene = gamvas.State.extend({
 	init: function() {
-		this.victims = [];
-
-		this.dim = gamvas.getCanvasDimension();
-
-        gamvas.physics.resetWorld(0, 0, false);
-
-		this.addActor(new cityActor("city", 0, 0, Application.levelData));
-		this.addActor(this.carActor = new carActor("car", 0, 0, Application.levelData.car));
-		this.addActor(this.score = new scoreActor("score", 0, 0));
-
-		if (gamvas.config.debug) {
-			this.addActor(new debugActor("debug"));
-		}
-
-		this.init = true;
+		gamvas.physics.resetWorld(0, 0, false);
 	},
 
 	addVictim: function (data) {
@@ -62,5 +48,25 @@ levelScene = gamvas.State.extend({
 	// switch to rain state on space
 	onKeyUp: function(k) {
 		return false;
+	},
+
+	leave: function () {
+		gamvas.physics.resetWorld(0, 0, false);
+	},
+
+	enter: function() {
+		this.victims = [];
+
+		this.dim = gamvas.getCanvasDimension();
+
+		this.addActor(new cityActor("city", 0, 0, Application.levelData));
+		this.addActor(this.carActor = new carActor("car", 0, 0, Application.levelData.car));
+		this.addActor(this.score = new scoreActor("score", 0, 0));
+
+		if (gamvas.config.debug) {
+			this.addActor(new debugActor("debug"));
+		}
+
+		this.init = true;
 	}
 });
