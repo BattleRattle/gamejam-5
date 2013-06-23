@@ -13,7 +13,11 @@
 		"top-right",
 		"cs-right",
 		"cs-bottom",
-		"crosswalk"
+		"crosswalk",
+		"parking-bottom",
+		"parking-top",
+		"parking-left",
+		"parking-right"
 	],
 	"size": {
 		"height": 10,

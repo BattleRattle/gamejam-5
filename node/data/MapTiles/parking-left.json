@@ -1,0 +1,42 @@
+{
+	"id": "parking-left",
+	"image": "parking-left.jpg",
+	"position": "W",
+	"collisions": [
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 0,
+			"width": 160,
+			"height": 52
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 52,
+			"width": 24,
+			"height": 408
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 460,
+			"width": 160,
+			"height": 52
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 0,
+			"width": 160,
+			"height": 160
+		},
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		}
+	]
+}
