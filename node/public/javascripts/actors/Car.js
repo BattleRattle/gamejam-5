@@ -13,6 +13,7 @@ carActor = gamvas.Actor.extend({
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
 		this.setFile(st.resource.getImage('images/cars/green.png'));
+		this.explosionSound = new gamvas.Sound(st.resource.getSound("/sounds/explosion-2.wav"));
 
 		// a car is a moving object
 		this.position.y -= 250;
@@ -95,7 +96,8 @@ carActor = gamvas.Actor.extend({
 	},
 
 	drawDamage:function(t){
-		if(this.health < 0.0){
+		if (this.health < 0.0) {
+			this.explosionSound.play();
 			this.removeActor(this, this.position.x, this.position.y);
 
 			return;
