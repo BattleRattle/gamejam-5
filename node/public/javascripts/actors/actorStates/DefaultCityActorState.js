@@ -29,9 +29,19 @@ defaultCityActorState = gamvas.ActorState.extend({
 			}
 			x += 512;
 		}
+
+        // assume a maximum camera zoom of 2!
+        // thus we use full size map for calculations
+        var startX = this.config.size.width * 512 * 2;
+        var startY = this.config.size.height * 512 * 2;
+
+        var scale =  (this.config.size.width > this.config.size.height)? (this.config.size.width):(this.config.size.width)* 2;
+        this.backgroundActor = new greenboxActor("greenbox-background",-startX * 0.5, -startY * 0.5, scale);
+
 	},
 
 	draw: function (t) {
+        this.backgroundActor.draw(t);
 		for (var x = this.actors.length - 1; x >= 0; x--) {
 			for (var y = this.actors[x].length - 1; y >= 0; y--) {
 				this.actors[x][y].draw(t);
