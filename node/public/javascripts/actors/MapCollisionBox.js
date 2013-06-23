@@ -14,7 +14,7 @@ mapCollisionBoxActor = gamvas.Actor.extend({
 			this.bodyRect(this.position.x + config.radius / 2, this.position.y + config.radius / 2, config.radius, gamvas.physics.STATIC);
 		}
 
-		this.setGroupIndex(-1);
+		this.setGroupIndex(-5);
 	},
 
 	onCollisionEnter: function(a) {

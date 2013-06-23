@@ -6,7 +6,7 @@ var VictimGod = function(levelData, dataLoaderFactory) {
 	this.victims = [];
 	this.victimCounter = 0;
 
-	this.levelId = levelData.levelId;
+	this.levelId = levelData.id;
 	this.levelData = levelData;
 
 	this.victimDataLoaderFactory = dataLoaderFactory.getDataLoader('Victim');

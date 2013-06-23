@@ -11,6 +11,7 @@ defaultCarActorState = gamvas.ActorState.extend({
 			this.actor.removeActor(this.actor, this.actor.position.x, this.actor.position.y)
 			return;
 		}
+		this.actor.setGroupIndex(1);
 		this.actor.calculatePhysics(t);
 	}
 });

@@ -32,7 +32,7 @@ victimActor = gamvas.Actor.extend({
 		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
 
 		this.preDraw(0);
-		this.setGroupIndex(-1);
+		this.setGroupIndex(-5);
 	},
 
 	preDraw: function(t) {
@@ -54,7 +54,7 @@ victimActor = gamvas.Actor.extend({
 	},
 
 	onCollisionEnter: function(a) {
-		if (!this.collided && a.name == "car") {
+		if (!this.collided && a.groupIndex != -5) {
 			this.collided = true;
 			handlerFactory.getHandler("Victim").callCollide(this.config);
 			console.log("i got hit by "+a.name);
