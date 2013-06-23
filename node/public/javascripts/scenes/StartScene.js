@@ -46,6 +46,10 @@ startScene = gamvas.State.extend({
 	onMouseDown: function(b, x, y) {
 	},
 
+	onTouchDown: function(id, x, y, ev) {
+		gamvas.state.setState("level");
+	},
+
 	// prevent browser scrolling on space
 	onKeyDown: function(k) {
 		if (k == 72) {
