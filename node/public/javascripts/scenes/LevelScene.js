@@ -11,6 +11,12 @@ levelScene = gamvas.State.extend({
 		gamvas.physics.resetWorld(0, 0, false);
         this.autoClear = false;
 		this.hornSound = this.addSound("/sounds/horn-1.mp3");
+		this.splatterSounds = this.addSound("/sounds/splatter-1.mp3");
+		this.carBombSound = this.addSound(("/sounds/explosion-1.wav"));
+		this.screamSound = this.addSound(("/sounds/scream-1.mp3"));
+		this.splatterSoundsPlaying = false;
+		this.carBombSoundPlaying = false;
+		this.screamSoundPlaying = false;
 
 		this.bombAvailable = true;
 	},
@@ -29,6 +35,39 @@ levelScene = gamvas.State.extend({
 			that.removeActor(victim);
 		}, 125);
 
+	},
+
+	playSplatter: function() {
+		var that = this;
+		if (!that.splatterSoundsPlaying) {
+			that.splatterSoundsPlaying = true;
+			that.splatterSounds.play();
+			setTimeout(function() {
+				that.splatterSoundsPlaying = false;
+			}, 400);
+		}
+	},
+
+	playCarBomb: function() {
+		var that = this;
+		if (!that.carBombSoundPlaying) {
+			that.carBombSoundPlaying = true;
+			that.carBombSound.play();
+			setTimeout(function() {
+				that.carBombSoundPlaying = false;
+			}, 400);
+		}
+	},
+
+	playScream: function() {
+		var that = this;
+		if (!that.screamSoundPlaying) {
+			that.screamSoundPlaying = true;
+			that.screamSound.play();
+			setTimeout(function() {
+				that.screamSoundPlaying = false;
+			}, 2500);
+		}
 	},
 
 	addPlayer: function (data) {
@@ -90,6 +129,10 @@ levelScene = gamvas.State.extend({
 	},
 
 	postDraw: function(t) {
+		var rand = getRandomInt(0, 777);
+		if (rand < 1) {
+			this.playScream();
+		}
 	},
 
 	onMouseDown: function(b, x, y) {
