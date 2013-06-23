@@ -17,6 +17,9 @@ var Level = function (levelId, connectionEventFactory) {
 	this.victimGod = new VictimGod(this.levelData, dataLoaderFactory);
 	this.victimEventHandler.registerVictimGod(levelId, this.victimGod);
 
+	for (var i = 0; i < this.levelData.startVictims; i++) {
+		this.spawnVictim();
+	}
 	var that = this;
 	setInterval(function() {
 		if (that.victimGod.victims.length < that.levelData.maxVictims) {
@@ -28,7 +31,8 @@ var Level = function (levelId, connectionEventFactory) {
 Level.prototype.addPlayer = function (player) {
 	var level = {
 		'levelData': this.levelData,
-		'playerPositions': this.getPlayerPositions(player)
+		'playerPositions': this.getPlayerPositions(player),
+		'victims': this.victimGod.victims
 	};
 
 	this.players.push(player);

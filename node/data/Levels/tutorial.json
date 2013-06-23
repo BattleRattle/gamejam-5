@@ -9,5 +9,6 @@
 		"default",
 		"pink"
 	],
-	"maxVictims": 200
+	"maxVictims": 200,
+	"startVictims": 50
 }

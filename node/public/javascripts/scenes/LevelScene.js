@@ -105,6 +105,11 @@ levelScene = gamvas.State.extend({
 			this.addActor(new debugActor("debug"));
 		}
 
+		for (var index in Application.levelData.initVictims) {
+			this.addVictim(Application.levelData.initVictims[index]);
+		}
+		delete Application.levelData.victims;
+
 		// lazy load existing players
 		for (var i in this.lazyPlayers) {
 			this.addPlayer(this.lazyPlayers[i]);
