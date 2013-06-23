@@ -1,0 +1,28 @@
+{
+	"id": "tile-marathon",
+	"image": "tile-marathon.jpg",
+	"position": "NE",
+	"collisions": [
+		{
+			"type": "rect",
+			"x": 352,
+			"y": 160,
+			"width": 24,
+			"height": 352
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 136,
+			"width": 376,
+			"height": 24
+		},
+		{
+			"type": "rect",
+			"x": 0,
+			"y": 352,
+			"width": 160,
+			"height": 160
+		}
+	]
+}

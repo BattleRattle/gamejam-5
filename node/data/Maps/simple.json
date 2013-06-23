@@ -2,7 +2,6 @@
 	"id": "simple",
 	"default": true,
 	"tilesets": [
-		"bottom-left",
 		"bottom-right",
 		"default",
 		"grass-bottom",
@@ -20,7 +19,8 @@
 		"parking-right",
 		"tile-telephone",
 		"tile-barricades",
-		"tile-streetart"
+		"tile-streetart",
+		"tile-marathon"
 	],
 	"size": {
 		"height": 10,
