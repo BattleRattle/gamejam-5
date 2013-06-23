@@ -25,7 +25,6 @@ VictimGod.prototype.buildVictim = function (init) {
 		for (var i = 0; i < this.levelData.marathonsen.length; i++) {
 			chance -= 9;
 
-			console.log(chance,rand)
 			if (chance < rand) {
 				return this.startMarathon(this.levelData.marathonsen[i]);
 			}
