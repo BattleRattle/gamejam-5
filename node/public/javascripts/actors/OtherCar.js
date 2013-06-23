@@ -16,7 +16,7 @@ otherCarActor = gamvas.Actor.extend({
 		this.setFile(st.resource.getImage('images/cars/green.png'));
 
 		// a car is a moving object
-		this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
+		this.bodyPolygon(this.position.x, this.position.y, config.collisionBox.polys, config.collisionBox.cx, config.collisionBox.cy, gamvas.physics.DYNAMIC);
 
 		this.wheels = [
 			new frontWheelActor("front_left", 27, -23, this),
@@ -50,6 +50,7 @@ otherCarActor = gamvas.Actor.extend({
 	drawDamage: function(t) {
 		if (this.health < 0.0) {
 			this.explosionSound.play();
+
 			Application.scenes['level'].addActor(new explosionEmitter("boom", this.position.x, this.position.y));
 			Application.scenes['level'].removeActor(this);
 

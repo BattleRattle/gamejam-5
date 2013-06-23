@@ -56,7 +56,7 @@ victimActor = gamvas.Actor.extend({
 		this.setRotation((this.direction.x === 0.0) ? Math.asin(this.direction.y) : Math.acos(this.direction.x));
 	},
 
-	update: function (t) {
+	update: function(t) {
 		this.setGroupIndex(-5);
 	},
 

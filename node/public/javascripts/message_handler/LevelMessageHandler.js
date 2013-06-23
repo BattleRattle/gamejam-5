@@ -17,5 +17,5 @@ LevelMessageHandler.prototype.callGetPlayerPositions = function() {
 };
 
 LevelMessageHandler.prototype.playerPositions = function(data) {
-//	Application.scenes['level'].updatePlayerPositions(data);
+	Application.scenes['level'].updatePlayerPositions(data);
 };

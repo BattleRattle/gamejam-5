@@ -18,7 +18,5 @@ splatterActor = gamvas.Actor.extend({
 			Application.images[imagePath] = st.resource.getImage(imagePath);
 		}
 		this.setFile(Application.images[imagePath]);
-
-
 	}
 });
