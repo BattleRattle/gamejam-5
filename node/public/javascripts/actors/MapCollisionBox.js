@@ -15,9 +15,6 @@ mapCollisionBoxActor = gamvas.Actor.extend({
 		}
 
 		this.setGroupIndex(-5);
-	},
-
-	onCollisionEnter: function(a) {
-		console.log(this.name + " got hit by "+a.name);
 	}
+
 });
