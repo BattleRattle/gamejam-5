@@ -21,7 +21,7 @@ wheelActor = gamvas.Actor.extend({
         this.restitution = 0.0;
 
 		// a wheel is a moving object
-		this.bodyRect(this.position.x, this.position.y, 16, 4, gamvas.physics.DYNAMIC);
+		this.bodyRect(this.position.x, this.position.y, 16, 6, gamvas.physics.DYNAMIC);
 
 		// finally add the state to our actor
 		this.addState(new gamvas.ActorState('default'));
