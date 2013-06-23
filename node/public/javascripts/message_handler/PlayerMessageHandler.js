@@ -37,3 +37,9 @@ PlayerMessageHandler.prototype.playerLeft = function(data) {
 		Application.scenes['level'].removePlayer(data);
 	}
 };
+
+PlayerMessageHandler.prototype.playerDied = function(data) {
+	console.log('player %s died at x: %s, y: %s', data.playerId, data.x, data.y);
+
+	Application.scenes['level'].playerDied(data);
+};

@@ -91,6 +91,26 @@ otherCarActor = gamvas.Actor.extend({
 		});
 		this._super(t);
 		this.drawDamage(t);
+	},
+
+	removeActor: function(elem, x, y) {
+		var explosion = new explosionEmitter("boom", x, y, 10);
+
+		Application.scenes['level'].addActor(explosion);
+		setTimeout(function () {
+			var boom = new explosionCollisionActor("boom - kabooom", x, y, 10);
+			Application.scenes['level'].addActor(boom);
+
+			setTimeout(function() {
+				Application.scenes['level'].removeActor(boom);
+			}, 100);
+		}, 100);
+
+
+		Application.scenes['level'].removeActor(elem);
+		setTimeout(function() {
+			Application.scenes['level'].addActor(new groundZeroActor("zero", x, y));
+		}, 300);
 	}
 
 });
