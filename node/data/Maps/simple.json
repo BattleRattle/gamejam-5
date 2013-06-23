@@ -17,7 +17,8 @@
 		"parking-bottom",
 		"parking-top",
 		"parking-left",
-		"parking-right"
+		"parking-right",
+		"tile-telephone"
 	],
 	"size": {
 		"height": 10,
