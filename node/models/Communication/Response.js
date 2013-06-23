@@ -8,7 +8,8 @@ var Response = function (remoteClass, method, responseType, data) {
 }
 
 Response.prototype.TYPE_DIRECT = 'direct';
-Response.prototype.TYPE_BROADCAST = 'broadcast';
+Response.prototype.TYPE_BROADCAST_INCLUDE_SELF = 'broadcast_include_self';
+Response.prototype.TYPE_BROADCAST_EXCLUDE_SELF = 'broadcast_exclude_self';
 
 Response.prototype.getRemoteClass = function () {
 	return this.remoteClass;

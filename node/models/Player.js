@@ -4,6 +4,11 @@ var Player = function (socket) {
 
 	this.playerId = ++playerId;
 	this.socket = socket;
+	this.position = {
+		'x': 0,
+		'y': 0,
+		'angle': 0
+	};
 
 	this.setLevel('tutorial');
 }

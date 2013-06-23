@@ -16,7 +16,16 @@ PlayerEventHandler.prototype.updatePosition = function (player, data) {
 		'x': data.x,
 		'y': data.y,
 		'angle': data.angle
-	});
+	}, false);
+}
+
+PlayerEventHandler.prototype.callNewPlayer = function(player) {
+	this.createBroadcastResponse(player, PlayerEventHandler.CLASS_NAME, 'newPlayer', {
+		'playerId': player.playerId,
+		'x': 0,
+		'y': 0,
+		'angle': 0
+	}, false);
 };
 
 PlayerEventHandler.prototype.letMeDie = function (player, data) {

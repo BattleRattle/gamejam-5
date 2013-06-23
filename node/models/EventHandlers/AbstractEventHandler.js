@@ -19,8 +19,12 @@ AbstractEventHandler.prototype.createDirectResponse = function (player, remoteCl
 	this.connectionHandler.handleResponse(player.getSocket(), response);
 }
 
-AbstractEventHandler.prototype.createBroadcastResponse = function (player, remoteClass, method, data) {
-	var response = new Response(remoteClass, method, Response.prototype.TYPE_BROADCAST, data);
+AbstractEventHandler.prototype.createBroadcastResponse = function (player, remoteClass, method, data, includeSelf) {
+	if (typeof includeSelf === 'undefined') {
+		includeSelf = true;
+	}
+
+	var response = new Response(remoteClass, method, includeSelf ? Response.prototype.TYPE_BROADCAST_INCLUDE_SELF : Response.prototype.TYPE_BROADCAST_EXCLUDE_SELF, data);
 	this.connectionHandler.handleResponse(player.getSocket(), response);
 }
 

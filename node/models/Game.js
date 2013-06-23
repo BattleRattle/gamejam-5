@@ -1,7 +1,8 @@
 var Response = require('./Communication/Response.js');
 var DataLoaderFactory = require('./DataLoaderFactory.js');
-var Player = require('./Player.js'),
-	Level = require('./Level/Level');
+var Player = require('./Player.js');
+var Level = require('./Level/Level');
+var PlayerEventHandler = require('./EventHandlers/PlayerEventHandler.js');
 
 var Game = function(connectionHandler) {
 
@@ -12,7 +13,6 @@ var Game = function(connectionHandler) {
 	this.levels = {};
 
 	this.connectionHandler.init(this);
-
 }
 
 Game.prototype.start = function() {
@@ -26,8 +26,27 @@ Game.prototype.createPlayer = function(socket) {
 	var level = this.getLevel(player.getLevel());
 	level.addPlayer(player);
 
+	var playerHandler = this.connectionEventFactory.getEventHandler(PlayerEventHandler.CLASS_NAME);
+	playerHandler.callNewPlayer(player);
+
 	return player;
 };
+
+Game.prototype.removePlayer = function(socket) {
+	var player = this.getPlayerBySocket(socket);
+	var level = player.getLevel();
+	this.levels[level].removePlayer(player);
+
+	var newPlayers = [];
+	for (var i in this.players) {
+		if (this.players[i] === player) {
+			continue;
+		}
+
+		newPlayers.push(this.players[i]);
+	}
+	this.players = newPlayers;
+}
 
 Game.prototype.getLevel = function (levelId) {
 	if (!this.levels[levelId]) {

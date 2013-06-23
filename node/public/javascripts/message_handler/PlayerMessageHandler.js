@@ -18,6 +18,14 @@ PlayerMessageHandler.prototype.callLetMeDie = function (data) {
 	}));
 };
 
-PlayerMessageHandler.prototype.newPlayerPosition = function (data) {
-	//console.log(data);
+PlayerMessageHandler.prototype.newPlayerPosition = function(data) {
+	Application.scenes['level'].updatePlayerPositions([data]);
+};
+
+PlayerMessageHandler.prototype.newPlayer = function(data) {
+	console.log(data);
+
+	if (Application.scenes['level']._isInitialized) {
+		Application.scenes['level'].addPlayer(data);
+	}
 };

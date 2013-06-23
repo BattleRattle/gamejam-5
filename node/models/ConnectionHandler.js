@@ -31,13 +31,11 @@ ConnectionHandler.prototype.handleConnection = function (socket) {
 	});
 
 	socket.on('disconnect', function () {
-		that.handleDisconnect(socket);
+//		that.handleDisconnect(socket);
 	});
 }
 
 ConnectionHandler.prototype.handleDisconnect = function (socket) {
-	// @TODO: inform clients
-
 	var newConnections = [];
 	for (var existingSocket in this.connections) {
 		if (socket === existingSocket) {
@@ -46,8 +44,9 @@ ConnectionHandler.prototype.handleDisconnect = function (socket) {
 
 		newConnections.push(existingSocket);
 	}
-
 	this.connections = newConnections;
+
+	this.game.removePlayer(socket);
 }
 
 ConnectionHandler.prototype.callEventHandler = function (player, data) {
@@ -64,8 +63,10 @@ ConnectionHandler.prototype.handleResponse = function (socket, response) {
 
 	if (response.getType() === Response.prototype.TYPE_DIRECT) {
 		this.sendResponse(socket, response);
-	} else if (response.getType() === Response.prototype.TYPE_BROADCAST) {
-		this.sendBroadcast(socket, response);
+	} else if (response.getType() === Response.prototype.TYPE_BROADCAST_INCLUDE_SELF) {
+		this.sendBroadcast(socket, response, true);
+	} else if (response.getType() === Response.prototype.TYPE_BROADCAST_EXCLUDE_SELF) {
+		this.sendBroadcast(socket, response, false);
 	} else {
 		throw new Error('Response type not implemented: ' + response.getType());
 	}
@@ -75,7 +76,7 @@ ConnectionHandler.prototype.sendResponse = function (socket, response) {
 	socket.send(this.createRawResponse(response));
 }
 
-ConnectionHandler.prototype.sendBroadcast = function (socket, response) {
+ConnectionHandler.prototype.sendBroadcast = function (socket, response, includeSelf) {
 	var player = this.game.getPlayerBySocket(socket);
 	if (!player) {
 		return;
@@ -83,8 +84,12 @@ ConnectionHandler.prototype.sendBroadcast = function (socket, response) {
 
 	var players = this.game.getPlayersOfSameLevel(player.getLevel());
 
-	for (var player in players) {
-		players[player].getSocket().send(this.createRawResponse(response));
+	for (var i in players) {
+		if (players[i] === player && !includeSelf) {
+			continue;
+		}
+
+		players[i].getSocket().send(this.createRawResponse(response));
 	}
 }
 

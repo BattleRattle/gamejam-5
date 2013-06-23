@@ -1,22 +1,56 @@
 levelScene = gamvas.State.extend({
+	create: function(name) {
+		this._super(name);
+
+		this.victims = [];
+		this.players = [];
+		this.lazyPlayers = [];
+	},
+
 	init: function() {
 		gamvas.physics.resetWorld(0, 0, false);
 		this.hornSound = this.addSound("/sounds/horn-1.mp3");
 	},
 
-	addVictim: function (data) {
-		if (this.init && this.victims) {
-			var victim = new victimActor("victim" + data.id, data.x, data.y, data);
-			this.victims[data.id] = victim;
-			this.addActor(victim);
-		}
+	addVictim: function(data) {
+		var victim = new victimActor("victim" + data.id, data.x, data.y, data);
+		this.victims[data.id] = victim;
+		this.addActor(victim);
 	},
 
 	removeVictim: function (data) {
 		var victim = this.victims[data.id];
 		this.addActor(new splatterActor("blood" + data.id, victim.position.x, victim.position.y, data.splatter));
 		this.removeActor(victim);
+	},
 
+	addPlayer: function (data) {
+		var player = new otherCarActor("car" + data.playerId, data.x, data.y, Application.levelData.car);
+		this.players[data.playerId] = player;
+		this.addActor(player);
+	},
+
+	addPlayerLazy: function (data) {
+		this.lazyPlayers.push(data);
+	},
+
+	removePlayer: function (data) {
+		this.removeActor(this.players[data.playerId]);
+	},
+
+	updatePlayerPositions: function(playerPositions) {
+		for (var i in playerPositions) {
+			var playerPosition = playerPositions[i];
+
+			if (typeof this.players[playerPosition.playerId] === 'undefined') {
+				this.addPlayer(playerPosition);
+			} else {
+				this.players[playerPosition.playerId].body.SetPositionAndAngle({
+					'x': playerPosition.x,
+					'y': playerPosition.y
+				}, gamvas.math.degToRad(playerPosition.angle));
+			}
+		}
 	},
 
 	preDraw: function(t) {
@@ -61,8 +95,6 @@ levelScene = gamvas.State.extend({
 	},
 
 	enter: function() {
-		this.victims = [];
-
 		this.dim = gamvas.getCanvasDimension();
 
 		this.addActor(new cityActor("city", 0, 0, Application.levelData));
@@ -73,6 +105,11 @@ levelScene = gamvas.State.extend({
 			this.addActor(new debugActor("debug"));
 		}
 
-		this.init = true;
+		// lazy load existing players
+		for (var i in this.lazyPlayers) {
+			this.addPlayer(this.lazyPlayers[i]);
+		}
+
+		handlerFactory.getHandler('Level').callGetPlayerPositions();
 	}
 });

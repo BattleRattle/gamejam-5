@@ -26,9 +26,13 @@ var Level = function (levelId, connectionEventFactory) {
 };
 
 Level.prototype.addPlayer = function (player) {
-	this.players.push(player);
+	var level = {
+		'levelData': this.levelData,
+		'playerPositions': this.getPlayerPositions(player)
+	};
 
-	this.levelEventHandler.enter(player, this.levelData);
+	this.players.push(player);
+	this.levelEventHandler.enter(player, level);
 };
 
 Level.prototype.removePlayer = function (player) {
@@ -52,6 +56,25 @@ Level.prototype.spawnVictim = function () {
 		this.victimEventHandler.push(this.players[0], victim);
 	}
 };
+
+Level.prototype.getPlayerPositions = function(player) {
+	var playerPositions = [];
+
+	for (var i in this.players) {
+		if (this.players[i] === player) {
+			continue;
+		}
+
+		playerPositions.push({
+			'playerId': this.players[i].playerId,
+			'x': this.players[i].position.x,
+			'y': this.players[i].position.y,
+			'angle': this.players[i].position.angle
+		});
+	}
+
+	return playerPositions;
+}
 
 module.exports = Level;
 
