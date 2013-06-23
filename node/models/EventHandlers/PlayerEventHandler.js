@@ -1,6 +1,6 @@
 var AbstractEventHandler = require('./AbstractEventHandler.js');
 
-var PlayerEventHandler = function () {
+var PlayerEventHandler = function() {
 
 	this.victimCounter = 0;
 	this.victims = [];
@@ -10,7 +10,7 @@ var PlayerEventHandler = function () {
 PlayerEventHandler.prototype = AbstractEventHandler.prototype;
 PlayerEventHandler.CLASS_NAME = 'Player';
 
-PlayerEventHandler.prototype.updatePosition = function (player, data) {
+PlayerEventHandler.prototype.updatePosition = function(player, data) {
 	player.position.x = data.x;
 	player.position.y = data.y;
 	player.position.angle = data.angle;
@@ -38,8 +38,11 @@ PlayerEventHandler.prototype.callPlayerLeft = function(player) {
 	}, false);
 };
 
-PlayerEventHandler.prototype.letMeDie = function (player, data) {
-	console.log("player:", player.playerId, "died")
+PlayerEventHandler.prototype.letMeDie = function(player, data) {
+	console.log('player %s died at x: %s, y: %s', player.playerId, data.x, data.y);
+
+	data.playerId = player.playerId;
+	this.createBroadcastResponse(player, PlayerEventHandler.CLASS_NAME, 'playerDied', data, false);
 };
 
 module.exports = PlayerEventHandler;

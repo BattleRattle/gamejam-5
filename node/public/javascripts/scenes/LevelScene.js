@@ -78,6 +78,17 @@ levelScene = gamvas.State.extend({
 		this.camera.setPosition(this.carActor.position.x, this.carActor.position.y);
 	},
 
+	playerDied: function(data) {
+		for (var i in this.players) {
+			var player = this.players[i];
+			if (player.name !== 'car' + data.playerId) {
+				continue;
+			}
+
+			player.removeActor(player, data.x, data.y);
+		}
+	},
+
 	postDraw: function(t) {
 	},
 

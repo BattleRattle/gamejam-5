@@ -200,7 +200,10 @@ carActor = gamvas.Actor.extend({
 			Application.scenes['level'].addActor(new groundZeroActor("zero", x, y));
 		}, 300);
 
-		handlerFactory.getHandler('Player').callLetMeDie(this.config);
+		handlerFactory.getHandler('Player').callLetMeDie({
+			'x': x,
+			'y': y
+		});
 	}
 
 });
