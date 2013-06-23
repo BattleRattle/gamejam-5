@@ -28,6 +28,7 @@ bombActor = gamvas.Actor.extend({
 
 	explode: function (x, y, config) {
 		Application.scenes['level'].addActor(new explosionEmitter("boom", x, y, config.size));
+		Application.scenes['level'].playCarBomb();
 		setTimeout(function () {
 			var boom = new explosionCollisionActor("boom - kabooom", x, y, config.size);
 			Application.scenes['level'].addActor(boom);

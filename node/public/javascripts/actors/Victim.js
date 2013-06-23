@@ -68,6 +68,10 @@ victimActor = gamvas.Actor.extend({
 
 			this.collided = true;
 			handlerFactory.getHandler("Victim").callCollide(this.config);
+
+			if (a.name == "car") {
+				Application.scenes['level'].playSplatter();
+			}
 		}
 	}
 });
