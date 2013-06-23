@@ -1,4 +1,3 @@
-
 carActor = gamvas.Actor.extend({
 	// we add a extra parameter name file, which a normal gamvas.Actor does not have.
 	// this is a little trick, so we can use the state wide resource handler to
@@ -12,19 +11,20 @@ carActor = gamvas.Actor.extend({
 
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
-		this.setFile(st.resource.getImage('images/cars/green.png'));
+		this.setFile(st.resource.getImage('images/cars/' + config.image));
+		this.explosionSound = new gamvas.Sound(st.resource.getSound("/sounds/explosion-2.wav"));
 
 		// a car is a moving object
 		this.position.y -= 250;
 		this.layer = 5;
 
-		this.bodyPolygon(this.position.x, this.position.y, [[0,6],[6,0], [82,0], [96,12], [96,36],[82,48],[6,48],[0,42]], 48, 24, gamvas.physics.DYNAMIC);
+		this.bodyPolygon(this.position.x, this.position.y, config.collisionBox.polys, config.collisionBox.cx, config.collisionBox.cy, gamvas.physics.DYNAMIC);
 
 		this.wheels = [
-			new frontWheelActor("front_left", 27, -21 -250, this),
-			new frontWheelActor("front_right", 27, 21-250, this),
-			new rearWheelActor("rear_left", -27, -21-250, this),
-			new rearWheelActor("rear_right", -27, 21-250, this)
+			new frontWheelActor("front_left", 27, -21 - 250, this),
+			new frontWheelActor("front_right", 27, 21 - 250, this),
+			new rearWheelActor("rear_left", -27, -21 - 250, this),
+			new rearWheelActor("rear_right", -27, 21 - 250, this)
 		];
 
 		this.restitution = 0.1; // bounce
@@ -36,10 +36,10 @@ carActor = gamvas.Actor.extend({
 
 		this.health = 1000;
 
-		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-20 -250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(20-250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(-20-250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
-		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(20-250)), {lowerAngle:0, upperAngle:0, enableLimit:true, enableMotor:false});
+		this.flJoint = this.addRevoluteJoint(this.wheels[0], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(-20 - 250)), {lowerAngle: 0, upperAngle: 0, enableLimit: true, enableMotor: false});
+		this.frJoint = this.addRevoluteJoint(this.wheels[1], new gamvas.Vector2D(gamvas.physics.toWorld(27), gamvas.physics.toWorld(20 - 250)), {lowerAngle: 0, upperAngle: 0, enableLimit: true, enableMotor: false});
+		this.addRevoluteJoint(this.wheels[2], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(-20 - 250)), {lowerAngle: 0, upperAngle: 0, enableLimit: true, enableMotor: false});
+		this.addRevoluteJoint(this.wheels[3], new gamvas.Vector2D(gamvas.physics.toWorld(-27), gamvas.physics.toWorld(20 - 250)), {lowerAngle: 0, upperAngle: 0, enableLimit: true, enableMotor: false});
 
 		// finally add the state to our actor
 		this.addState(new defaultCarActorState('default'));
@@ -54,9 +54,9 @@ carActor = gamvas.Actor.extend({
 		};
 		this.updateEveryMilliSeconds = 1000 / 10;
 		this.lastUpdateTime = 0;
-       	this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
-       	this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);
-        this.darkSmoke = new darkSmokeEmitter("carDamageDarkSmoke", this.position.x, this.position.y);
+		this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
+		this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);
+		this.darkSmoke = new darkSmokeEmitter("carDamageDarkSmoke", this.position.x, this.position.y);
 	},
 
 	calculatePhysics: function(t) {
@@ -89,20 +89,20 @@ carActor = gamvas.Actor.extend({
 	},
 
 	onCollision: function(a, ni) {
-		if (ni > 20 ) {
+		if (ni > 20) {
 			this.health -= ni * 0.1;
 		}
 	},
 
-	drawDamage:function(t){
-		if(this.health < 0.0){
+	drawDamage: function(t) {
+		if (this.health < 0.0) {
+			this.explosionSound.play();
 			this.removeActor(this, this.position.x, this.position.y);
 
 			return;
 		}
 
-
-		if(this.health < this.MAX_HEALTH * 0.2){
+		if (this.health < this.MAX_HEALTH * 0.2) {
 			this.sparks.setPosition(this.position.x, this.position.y);
 
 			var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
@@ -111,8 +111,7 @@ carActor = gamvas.Actor.extend({
 			return;
 		}
 
-
-		if(this.health < this.MAX_HEALTH * 0.5){
+		if (this.health < this.MAX_HEALTH * 0.5) {
 
 			this.darkSmoke.setPosition(this.position.x, this.position.y);
 
@@ -122,7 +121,7 @@ carActor = gamvas.Actor.extend({
 			return;
 		}
 
-		if(this.health < this.MAX_HEALTH * 0.833){
+		if (this.health < this.MAX_HEALTH * 0.833) {
 			this.smoke.setPosition(this.position.x, this.position.y);
 
 			var worldForwardVec = this.body.GetWorldVector(new Box2D.Common.Math.b2Vec2(1, 0));
@@ -132,14 +131,13 @@ carActor = gamvas.Actor.extend({
 		}
 	},
 
-	draw:function(t){
+	draw: function(t) {
 
-        this.wheels.forEach(function(wheel) {
-            wheel.draw(t);
-        });
-        this._super(t);
+		this.wheels.forEach(function(wheel) {
+			wheel.draw(t);
+		});
+		this._super(t);
 		this.drawDamage(t)
-
 	},
 
 	getForwardVelocity: function() {
@@ -187,7 +185,6 @@ carActor = gamvas.Actor.extend({
 		setTimeout(function() {
 			Application.scenes['level'].addActor(new groundZeroActor("zero", x, y));
 		}, 300);
-
 
 		handlerFactory.getHandler('Player').callLetMeDie(this.config);
 	}

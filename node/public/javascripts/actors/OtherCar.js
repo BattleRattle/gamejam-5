@@ -9,12 +9,14 @@ otherCarActor = gamvas.Actor.extend({
 		// get the current state, so we can acsess its resource loader with st.resource
 		var st = gamvas.state.getCurrentState();
 
+		this.explosionSound = new gamvas.Sound(st.resource.getSound("/sounds/explosion-2.wav"));
+
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, whic h is the resource handler
 		this.setFile(st.resource.getImage('images/cars/green.png'));
 
 		// a car is a moving object
-		this.bodyRect(this.position.x, this.position.y, config.collisionBox.width, config.collisionBox.height, gamvas.physics.DYNAMIC);
+		this.bodyPolygon(this.position.x, this.position.y, config.collisionBox.polys, config.collisionBox.cx, config.collisionBox.cy, gamvas.physics.DYNAMIC);
 
 		this.wheels = [
 			new frontWheelActor("front_left", 27, -23, this),
@@ -47,6 +49,8 @@ otherCarActor = gamvas.Actor.extend({
 
 	drawDamage: function(t) {
 		if (this.health < 0.0) {
+			this.explosionSound.play();
+
 			Application.scenes['level'].addActor(new explosionEmitter("boom", this.position.x, this.position.y));
 			Application.scenes['level'].removeActor(this);
 
