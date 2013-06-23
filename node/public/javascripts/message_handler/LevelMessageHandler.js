@@ -3,7 +3,9 @@ var LevelMessageHandler = function (socket) {
 };
 
 LevelMessageHandler.prototype.getData = function (data) {
+	console.log(data)
 	Application.levelData = data.levelData;
+	Application.levelData.initVictims = data.victims;
 //	Application.scenes['level'].updatePlayerPositions(data.playerPositions);
 };
 
