@@ -13,7 +13,11 @@ levelScene = gamvas.State.extend({
 		this.hornSound = this.addSound("/sounds/horn-1.mp3");
 		this.splatterSounds = this.addSound("/sounds/splatter-1.mp3");
 		this.carBombSound = this.addSound(("/sounds/explosion-1.wav"));
-		this.screamSound = this.addSound(("/sounds/scream-1.mp3"));
+		this.screamSounds = [
+			this.addSound("/sounds/scream-1.mp3"),
+			this.addSound("/sounds/scream-2.wav"),
+			this.addSound("/sounds/scream-3.wav")
+		];
 		this.splatterSoundsPlaying = false;
 		this.carBombSoundPlaying = false;
 		this.screamSoundPlaying = false;
@@ -63,7 +67,7 @@ levelScene = gamvas.State.extend({
 		var that = this;
 		if (!that.screamSoundPlaying) {
 			that.screamSoundPlaying = true;
-			that.screamSound.play();
+			that.screamSounds[(Math.random() * this.screamSounds.length)|0].play();
 			setTimeout(function() {
 				that.screamSoundPlaying = false;
 			}, 2500);
