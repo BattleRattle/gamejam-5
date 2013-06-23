@@ -89,6 +89,11 @@ carActor = gamvas.Actor.extend({
 	},
 
 	onCollision: function(a, ni) {
+
+        if(a.name === "boom - kabooom"){
+            this.health -= 15;
+            return;
+        }
 		if (ni > 20) {
 			this.health -= ni * 0.1;
 		}
