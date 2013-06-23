@@ -103,6 +103,10 @@ levelScene = gamvas.State.extend({
 				this.addPlayer(playerPosition);
 			}
 
+			if (this.players[playerPosition.playerId].body === null) {
+				return;
+			}
+
 			this.players[playerPosition.playerId].body.SetPositionAndAngle({
 				'x': playerPosition.x,
 				'y': playerPosition.y
