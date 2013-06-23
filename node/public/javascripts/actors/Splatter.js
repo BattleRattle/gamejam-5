@@ -13,7 +13,11 @@ splatterActor = gamvas.Actor.extend({
 
 		// use the resource loader set the Gamvas logo as its single image
 		// every state has predefined variables, one of them is .resource, which is the resource handler
-		this.setFile(st.resource.getImage('images/splatter/' + config.image));
+		var imagePath = 'images/splatter/' + config.image;
+		if (typeof Application.images[imagePath] == "undefined") {
+			Application.images[imagePath] = st.resource.getImage(imagePath);
+		}
+		this.setFile(Application.images[imagePath]);
 
 
 	}
