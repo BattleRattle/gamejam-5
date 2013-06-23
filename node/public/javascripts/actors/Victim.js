@@ -36,7 +36,7 @@ victimActor = gamvas.Actor.extend({
 	},
 
 	preDraw: function(t) {
-		var SPEED = 40;
+		var SPEED = this.config.data.speed;
 
 		this.currentPosition = this.currentPosition.add(multiplyVec2D(this.direction, SPEED * t));
 		var runLength = this.currentPosition.subtract(this.path.start).length();
