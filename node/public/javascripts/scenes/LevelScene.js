@@ -85,15 +85,26 @@ levelScene = gamvas.State.extend({
 	},
 
 	removePlayer: function (data) {
+		if (typeof this.players[data.playerId] !== 'undefined') {
+			return;
+		}
+
 		this.removeActor(this.players[data.playerId]);
 	},
 
 	updatePlayerPositions: function(playerPositions) {
 		for (var i in playerPositions) {
 			var playerPosition = playerPositions[i];
+			if (playerPosition.isDead) {
+//				continue;
+			}
 
 			if (typeof this.players[playerPosition.playerId] === 'undefined') {
 				this.addPlayer(playerPosition);
+			}
+
+			if (this.players[playerPosition.playerId].body === null) {
+				return;
 			}
 
 			this.players[playerPosition.playerId].body.SetPositionAndAngle({

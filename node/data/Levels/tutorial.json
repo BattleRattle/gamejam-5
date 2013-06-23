@@ -7,7 +7,9 @@
 		"blue",
 		"yellow",
 		"default",
-		"pink"
+		"pink",
+		"green",
+		"orange"
 	],
 	"maxVictims": 275,
 	"startVictims": 50,

@@ -41,6 +41,7 @@ PlayerEventHandler.prototype.callPlayerLeft = function(player) {
 PlayerEventHandler.prototype.letMeDie = function(player, data) {
 	console.log('player %s died at x: %s, y: %s', player.playerId, data.x, data.y);
 
+	player.isDead = true;
 	data.playerId = player.playerId;
 	this.createBroadcastResponse(player, PlayerEventHandler.CLASS_NAME, 'playerDied', data, false);
 };

@@ -54,7 +54,7 @@ carActor = gamvas.Actor.extend({
 			'x': 0,
 			'y': 0
 		};
-		this.updateEveryMilliSeconds = 1000 / 10;
+		this.updateEveryMilliSeconds = 1000 / 40;
 		this.lastUpdateTime = 0;
 		this.sparks = new sparkEmitter("carDamageSparks", this.position.x, this.position.y);
 		this.smoke = new smokeEmitter("carDamageSmoke", this.position.x, this.position.y);

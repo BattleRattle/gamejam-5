@@ -66,15 +66,12 @@ Level.prototype.getPlayerPositions = function(player) {
 	var playerPositions = [];
 
 	for (var i in this.players) {
-		if (this.players[i] === player) {
-			continue;
-		}
-
 		playerPositions.push({
 			'playerId': this.players[i].playerId,
 			'x': this.players[i].position.x,
 			'y': this.players[i].position.y,
-			'angle': this.players[i].position.angle
+			'angle': this.players[i].position.angle,
+			'isDead': this.players[i].isDead
 		});
 	}
 
