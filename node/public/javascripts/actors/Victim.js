@@ -33,7 +33,7 @@ victimActor = gamvas.Actor.extend({
 		);
 
 		this.setAnimation("running");
-		this.bodyRect(this.position.x, this.position.y, 25, 25, gamvas.physics.DYNAMIC);
+		this.bodyCircle(this.position.x, this.position.y, 12, gamvas.physics.DYNAMIC);
 
 		this.preDraw(0);
 	},
