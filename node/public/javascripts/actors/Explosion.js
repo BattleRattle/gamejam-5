@@ -1,8 +1,8 @@
 explosionEmitter = gamvas.ParticleEmitter.extend({
 	// overwrite constructor
-	create: function(name, x, y, img, anim) {
+	create: function(name, x, y, size) {
 		// call super constructor
-		this._super(name, x, y, img, anim);
+		this._super(name, x, y);
 		this.layer = 10;
 
 		// load the fire image, centered
@@ -12,11 +12,11 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		this.setImage(fireimg);
 
 		// stop after 25 particles are emitted
-		this.setParticleLimit(1250);
+		this.setParticleLimit(13 * size);
 
 		// emit 300 particles per second with the limit of 25
 		// this emitter will emit 1/12 of a second
-		this.setParticleRate(7500);
+		this.setParticleRate(755 * size);
 
 		// emitt in all directions
 		this.setRotationRange(2*Math.PI);
@@ -47,8 +47,8 @@ explosionEmitter = gamvas.ParticleEmitter.extend({
 		this.smoke.setImage(smokeimg);
 		this.smoke.setRotationRange(2*Math.PI);
 		// emit maximum of 50 (double as much as fire particles)
-		this.smoke.setParticleLimit(1250);
-		this.smoke.setParticleRate(7500);
+		this.smoke.setParticleLimit(125 * size);
+		this.smoke.setParticleRate(750 * size);
 		// particles are emitted with a speed range of 0-160 pixels per second
 		this.smoke.setParticleSpeed(200);
 		this.smoke.setParticleSpeedRange(200);

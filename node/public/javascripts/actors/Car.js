@@ -179,9 +179,9 @@ carActor = gamvas.Actor.extend({
 	},
 
 	removeActor: function(elem, x, y) {
-		Application.scenes['level'].addActor(new explosionEmitter("boom", x, y));
+		Application.scenes['level'].addActor(new explosionEmitter("boom", x, y, 10));
 		setTimeout(function () {
-			var boom = new explosionCollisionActor("boom - kabooom", x, y);
+			var boom = new explosionCollisionActor("boom - kabooom", x, y, 10);
 			Application.scenes['level'].addActor(boom);
 
 			setTimeout(function() {

@@ -82,6 +82,9 @@ levelScene = gamvas.State.extend({
 			case gamvas.key.H:
 				this.hornSound.play();
 				break;
+			case gamvas.key.B:
+				this.addActor(new bombActor("carbomb" + Application.bombCounter++, this.carActor.position.x, this.carActor.position.y, {size: 6, timeout: 1000 }));
+				break;
 		}
 	},
 

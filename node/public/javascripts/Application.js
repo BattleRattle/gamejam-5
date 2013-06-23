@@ -3,7 +3,8 @@ var Application = {
 
 	},
 	levelData: {},
-	images: {}
+	images: {},
+	bombCounter: 0
 }
 
 gamvas.event.addOnLoad(function() {
