@@ -12,7 +12,7 @@ otherCarActor = gamvas.Actor.extend({
 		this.explosionSound = new gamvas.Sound(st.resource.getSound("/sounds/explosion-2.wav"));
 
 		// use the resource loader set the Gamvas logo as its single image
-		// every state has predefined variables, one of them is .resource, which is the resource handler
+		// every state has predefined variables, one of them is .resource, whic h is the resource handler
 		this.setFile(st.resource.getImage('images/cars/green.png'));
 
 		// a car is a moving object

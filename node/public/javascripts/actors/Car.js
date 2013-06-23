@@ -182,6 +182,10 @@ carActor = gamvas.Actor.extend({
 	removeActor: function(elem, x, y) {
 		Application.scenes['level'].addActor(new explosionEmitter("boom", x, y));
 		Application.scenes['level'].removeActor(elem);
+		setTimeout(function() {
+			Application.scenes['level'].addActor(new groundZeroActor("zero", x, y));
+		}, 300);
+
 
 		handlerFactory.getHandler('Player').callLetMeDie(this.config);
 	}
