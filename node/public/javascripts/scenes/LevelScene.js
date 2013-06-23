@@ -9,6 +9,7 @@ levelScene = gamvas.State.extend({
 
 	init: function() {
 		gamvas.physics.resetWorld(0, 0, false);
+        this.autoClear = false;
 		this.hornSound = this.addSound("/sounds/horn-1.mp3");
 
 		this.bombAvailable = true;
@@ -129,5 +130,9 @@ levelScene = gamvas.State.extend({
 		}
 
 		handlerFactory.getHandler('Level').callGetPlayerPositions();
-	}
+	},
+    loading: function(t) {
+        // we don't like the loading screen
+        this.draw(t);
+    }
 });
